@@ -1,0 +1,7 @@
+int hit_per_event()
+{
+
+
+
+  return 0;
+}
