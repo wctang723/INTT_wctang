@@ -23,8 +23,8 @@ string GetRunType( string data )
 }
 
 // this is the main function
-int hit_per_event( string data = "/sphenix/tg/tg01/commissioning/INTT/merged_root_files/cosmics_inttall-00026073-0000_event_base_ana.root" )
-{
+int hit_per_event( string data = "/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020869-0000_event_base_ana.root" )
+{  
 
   // Open the ROOT file
   TFile* tf = new TFile( data.c_str(), "READ" );
