@@ -1,0 +1,637 @@
+nohup: ignoring input
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020840-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020841-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020842-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020843-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020844-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020845-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020846-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020847-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020848-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020849-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020850-0000_event_base_ana.root exists! 
+
+Running the hit_per_event.cc... 
+
+
+Processing /sphenix/u/wctang/workspace/my_INTT//stability_monitor/hit_per_event.cc("/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020850-0000_event_base_ana.root")...
+ctor InttEvent
+The file is opened.
+7953 / 7953 = 1 had at least 1 hit.
+#hit / all events = 66352726 / 7953 = 8343.11
+#hit / filled events = 66352726 / 7953 = 8343.11
+(int) 0
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020851-0000_event_base_ana.root exists! 
+
+Running the hit_per_event.cc... 
+
+
+Processing /sphenix/u/wctang/workspace/my_INTT//stability_monitor/hit_per_event.cc("/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020851-0000_event_base_ana.root")...
+ctor InttEvent
+The file is opened.
+13087 / 13087 = 1 had at least 1 hit.
+#hit / all events = 111777461 / 13087 = 8541.11
+#hit / filled events = 111777461 / 13087 = 8541.11
+(int) 0
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020852-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020853-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020854-0000_event_base_ana.root exists! 
+
+Running the hit_per_event.cc... 
+
+
+Processing /sphenix/u/wctang/workspace/my_INTT//stability_monitor/hit_per_event.cc("/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020854-0000_event_base_ana.root")...
+ctor InttEvent
+The file is opened.
+12546 / 12546 = 1 had at least 1 hit.
+#hit / all events = 107545551 / 12546 = 8572.1
+#hit / filled events = 107545551 / 12546 = 8572.1
+(int) 0
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020855-0000_event_base_ana.root exists! 
+
+Running the hit_per_event.cc... 
+
+
+Processing /sphenix/u/wctang/workspace/my_INTT//stability_monitor/hit_per_event.cc("/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020855-0000_event_base_ana.root")...
+ctor InttEvent
+The file is opened.
+14283 / 14283 = 1 had at least 1 hit.
+#hit / all events = 121652555 / 14283 = 8517.3
+#hit / filled events = 121652555 / 14283 = 8517.3
+(int) 0
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020856-0000_event_base_ana.root exists! 
+
+Running the hit_per_event.cc... 
+
+
+Processing /sphenix/u/wctang/workspace/my_INTT//stability_monitor/hit_per_event.cc("/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020856-0000_event_base_ana.root")...
+ctor InttEvent
+The file is opened.
+8960 / 8960 = 1 had at least 1 hit.
+#hit / all events = 75406008 / 8960 = 8415.85
+#hit / filled events = 75406008 / 8960 = 8415.85
+(int) 0
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020857-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020858-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020859-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020860-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020861-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020862-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020863-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020864-0000_event_base_ana.root exists! 
+
+Running the hit_per_event.cc... 
+
+
+Processing /sphenix/u/wctang/workspace/my_INTT//stability_monitor/hit_per_event.cc("/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020864-0000_event_base_ana.root")...
+Warning in <TFile::Init>: file /sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020864-0000_event_base_ana.root probably not closed, trying to recover
+Info in <TFile::Recover>: /sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020864-0000_event_base_ana.root, recovered key TTree:tree at address 835037140
+Warning in <TFile::Init>: successfully recovered 1 keys
+ctor InttEvent
+The file is opened.
+35235 / 35235 = 1 had at least 1 hit.
+#hit / all events = 277612354 / 35235 = 7878.88
+#hit / filled events = 277612354 / 35235 = 7878.88
+(int) 0
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020865-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020866-0000_event_base_ana.root exists! 
+
+Running the hit_per_event.cc... 
+
+
+Processing /sphenix/u/wctang/workspace/my_INTT//stability_monitor/hit_per_event.cc("/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020866-0000_event_base_ana.root")...
+Warning in <TFile::Init>: file /sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020866-0000_event_base_ana.root probably not closed, trying to recover
+Info in <TFile::Recover>: /sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020866-0000_event_base_ana.root, recovered key TTree:tree at address 432350012
+Warning in <TFile::Init>: successfully recovered 1 keys
+ctor InttEvent
+The file is opened.
+25152 / 25152 = 1 had at least 1 hit.
+#hit / all events = 138423891 / 25152 = 5503.49
+#hit / filled events = 138423891 / 25152 = 5503.49
+(int) 0
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020867-0000_event_base_ana.root exists! 
+
+Running the hit_per_event.cc... 
+
+
+Processing /sphenix/u/wctang/workspace/my_INTT//stability_monitor/hit_per_event.cc("/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020867-0000_event_base_ana.root")...
+Warning in <TFile::Init>: file /sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020867-0000_event_base_ana.root probably not closed, trying to recover
+Info in <TFile::Recover>: /sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020867-0000_event_base_ana.root, recovered key TTree:tree at address 880164067
+Warning in <TFile::Init>: successfully recovered 1 keys
+ctor InttEvent
+The file is opened.
+50437 / 50437 = 1 had at least 1 hit.
+#hit / all events = 283506286 / 50437 = 5621
+#hit / filled events = 283506286 / 50437 = 5621
+(int) 0
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020868-0000_event_base_ana.root exists! 
+
+Running the hit_per_event.cc... 
+
+
+Processing /sphenix/u/wctang/workspace/my_INTT//stability_monitor/hit_per_event.cc("/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020868-0000_event_base_ana.root")...
+Warning in <TFile::Init>: file /sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020868-0000_event_base_ana.root probably not closed, trying to recover
+Info in <TFile::Recover>: /sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020868-0000_event_base_ana.root, recovered key TTree:tree at address 869132857
+Warning in <TFile::Init>: successfully recovered 1 keys
+ctor InttEvent
+The file is opened.
+50176 / 50176 = 1 had at least 1 hit.
+#hit / all events = 278302131 / 50176 = 5546.52
+#hit / filled events = 278302131 / 50176 = 5546.52
+(int) 0
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020869-0000_event_base_ana.root exists! 
+
+Running the hit_per_event.cc... 
+
+
+Processing /sphenix/u/wctang/workspace/my_INTT//stability_monitor/hit_per_event.cc("/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020869-0000_event_base_ana.root")...
+Warning in <TFile::Init>: file /sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020869-0000_event_base_ana.root probably not closed, trying to recover
+Info in <TFile::Recover>: /sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020869-0000_event_base_ana.root, recovered key TTree:tree at address 532583502
+Warning in <TFile::Init>: successfully recovered 1 keys
+ctor InttEvent
+The file is opened.
+30685 / 30685 = 1 had at least 1 hit.
+#hit / all events = 169368558 / 30685 = 5519.59
+#hit / filled events = 169368558 / 30685 = 5519.59
+(int) 0
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020870-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020871-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020872-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020873-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020874-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020875-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020876-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020877-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020878-0000_event_base_ana.root exists! 
+
+Running the hit_per_event.cc... 
+
+
+Processing /sphenix/u/wctang/workspace/my_INTT//stability_monitor/hit_per_event.cc("/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020878-0000_event_base_ana.root")...
+Warning in <TFile::Init>: file /sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020878-0000_event_base_ana.root probably not closed, trying to recover
+Info in <TFile::Recover>: /sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020878-0000_event_base_ana.root, recovered key TTree:tree at address 901712711
+Warning in <TFile::Init>: successfully recovered 1 keys
+ctor InttEvent
+The file is opened.
+45738 / 45738 = 1 had at least 1 hit.
+#hit / all events = 289430571 / 45738 = 6328.01
+#hit / filled events = 289430571 / 45738 = 6328.01
+(int) 0
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020879-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020880-0000_event_base_ana.root exists! 
+
+Running the hit_per_event.cc... 
+
+
+Processing /sphenix/u/wctang/workspace/my_INTT//stability_monitor/hit_per_event.cc("/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020880-0000_event_base_ana.root")...
+Warning in <TFile::Init>: file /sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020880-0000_event_base_ana.root probably not closed, trying to recover
+Info in <TFile::Recover>: /sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020880-0000_event_base_ana.root, recovered key TTree:tree at address 877097878
+Warning in <TFile::Init>: successfully recovered 1 keys
+ctor InttEvent
+The file is opened.
+45043 / 45043 = 1 had at least 1 hit.
+#hit / all events = 278927091 / 45043 = 6192.46
+#hit / filled events = 278927091 / 45043 = 6192.46
+(int) 0
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020881-0000_event_base_ana.root exists! 
+
+Running the hit_per_event.cc... 
+
+
+Processing /sphenix/u/wctang/workspace/my_INTT//stability_monitor/hit_per_event.cc("/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020881-0000_event_base_ana.root")...
+Warning in <TFile::Init>: file /sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020881-0000_event_base_ana.root probably not closed, trying to recover
+Info in <TFile::Recover>: /sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020881-0000_event_base_ana.root, recovered key TTree:tree at address 595453943
+Warning in <TFile::Init>: successfully recovered 1 keys
+ctor InttEvent
+The file is opened.
+30470 / 30470 = 1 had at least 1 hit.
+#hit / all events = 188764515 / 30470 = 6195.09
+#hit / filled events = 188764515 / 30470 = 6195.09
+(int) 0
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020882-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020883-0000_event_base_ana.root exists! 
+
+Running the hit_per_event.cc... 
+
+
+Processing /sphenix/u/wctang/workspace/my_INTT//stability_monitor/hit_per_event.cc("/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020883-0000_event_base_ana.root")...
+Warning in <TFile::Init>: file /sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020883-0000_event_base_ana.root probably not closed, trying to recover
+Info in <TFile::Recover>: /sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020883-0000_event_base_ana.root, recovered key TTree:tree at address 878774661
+Warning in <TFile::Init>: successfully recovered 1 keys
+ctor InttEvent
+The file is opened.
+46096 / 46097 = 0.999978 had at least 1 hit.
+#hit / all events = 281363011 / 46097 = 6103.72
+#hit / filled events = 281363011 / 46096 = 6103.85
+(int) 0
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020884-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020885-0000_event_base_ana.root exists! 
+
+Running the hit_per_event.cc... 
+
+
+Processing /sphenix/u/wctang/workspace/my_INTT//stability_monitor/hit_per_event.cc("/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020885-0000_event_base_ana.root")...
+Warning in <TFile::Init>: file /sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020885-0000_event_base_ana.root probably not closed, trying to recover
+Info in <TFile::Recover>: /sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020885-0000_event_base_ana.root, recovered key TTree:tree at address 1068017380
+Warning in <TFile::Init>: successfully recovered 1 keys
+ctor InttEvent
+The file is opened.
+56316 / 56316 = 1 had at least 1 hit.
+#hit / all events = 343021871 / 56316 = 6091.02
+#hit / filled events = 343021871 / 56316 = 6091.02
+(int) 0
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020886-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020887-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020888-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020889-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020890-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020891-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020892-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020893-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020894-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020895-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020896-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020897-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020898-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020899-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020900-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020901-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020902-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020903-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020904-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020905-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020906-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020907-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020908-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020909-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020910-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020911-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020912-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020913-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020914-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020915-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020916-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020917-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020918-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020919-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020920-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020921-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020922-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020923-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020924-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020925-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020926-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020927-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020928-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020929-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020930-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020931-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020932-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020933-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020934-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020935-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020936-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020937-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020938-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020939-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020940-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020941-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020942-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020943-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020944-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020945-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020946-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020947-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020948-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020949-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020950-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020951-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020952-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020953-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020954-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020955-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020956-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020957-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020958-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020959-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020960-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020961-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020962-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020963-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020964-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020965-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020966-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020967-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020968-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020969-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020970-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020971-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020972-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020973-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020974-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020975-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020976-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020977-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020978-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020979-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020980-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020981-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020982-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020983-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020984-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020985-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020986-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020987-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020988-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020989-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020990-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020991-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020992-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020993-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020994-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020995-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020996-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020997-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020998-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00020999-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021000-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021001-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021002-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021003-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021004-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021005-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021006-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021007-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021008-0000_event_base_ana.root exists! 
+
+Running the hit_per_event.cc... 
+
+
+Processing /sphenix/u/wctang/workspace/my_INTT//stability_monitor/hit_per_event.cc("/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021008-0000_event_base_ana.root")...
+ctor InttEvent
+The file is opened.
+57889 / 57891 = 0.999965 had at least 1 hit.
+#hit / all events = 64969272 / 57891 = 1122.27
+#hit / filled events = 64969272 / 57889 = 1122.31
+(int) 0
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021009-0000_event_base_ana.root exists! 
+
+Running the hit_per_event.cc... 
+
+
+Processing /sphenix/u/wctang/workspace/my_INTT//stability_monitor/hit_per_event.cc("/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021009-0000_event_base_ana.root")...
+ctor InttEvent
+The file is opened.
+79554 / 79554 = 1 had at least 1 hit.
+#hit / all events = 87442368 / 79554 = 1099.16
+#hit / filled events = 87442368 / 79554 = 1099.16
+(int) 0
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021010-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021011-0000_event_base_ana.root exists! 
+
+Running the hit_per_event.cc... 
+
+
+Processing /sphenix/u/wctang/workspace/my_INTT//stability_monitor/hit_per_event.cc("/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021011-0000_event_base_ana.root")...
+ctor InttEvent
+The file is opened.
+81061 / 81061 = 1 had at least 1 hit.
+#hit / all events = 93232511 / 81061 = 1150.15
+#hit / filled events = 93232511 / 81061 = 1150.15
+(int) 0
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021012-0000_event_base_ana.root exists! 
+
+Running the hit_per_event.cc... 
+
+
+Processing /sphenix/u/wctang/workspace/my_INTT//stability_monitor/hit_per_event.cc("/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021012-0000_event_base_ana.root")...
+ctor InttEvent
+The file is opened.
+33999 / 33999 = 1 had at least 1 hit.
+#hit / all events = 35148360 / 33999 = 1033.81
+#hit / filled events = 35148360 / 33999 = 1033.81
+(int) 0
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021013-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021014-0000_event_base_ana.root exists! 
+
+Running the hit_per_event.cc... 
+
+
+Processing /sphenix/u/wctang/workspace/my_INTT//stability_monitor/hit_per_event.cc("/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021014-0000_event_base_ana.root")...
+Warning in <TFile::Init>: file /sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021014-0000_event_base_ana.root probably not closed, trying to recover
+Info in <TFile::Recover>: /sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021014-0000_event_base_ana.root, recovered key TTree:h_evttree at address 1105284365
+Info in <TFile::Recover>: /sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021014-0000_event_base_ana.root, recovered key TTree:tree at address 1238104615
+Warning in <TFile::Init>: successfully recovered 2 keys
+ctor InttEvent
+The file is opened.
+295341 / 295341 = 1 had at least 1 hit.
+#hit / all events = 330573519 / 295341 = 1119.29
+#hit / filled events = 330573519 / 295341 = 1119.29
+(int) 0
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021015-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021016-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021017-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021018-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021019-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021020-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021021-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021022-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021023-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021024-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021025-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021026-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021027-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021028-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021029-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021030-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021031-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021032-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021033-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021034-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021035-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021036-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021037-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021038-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021039-0000_event_base_ana.root doesn't exist! 
+
+/sphenix/tg/tg01/commissioning/INTT/merged_root_files/beam_inttall-00021040-0000_event_base_ana.root doesn't exist! 
+
