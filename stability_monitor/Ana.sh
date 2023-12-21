@@ -5,7 +5,7 @@ RunEnd=$2
 RunEnd=$((${RunEnd}+1))
 
 dir=/sphenix/tg/tg01/commissioning/INTT/merged_root_files/
-dir_code=/sphenix/u/wctang/workspace/my_INTT/
+dir_code=/sphenix/u/wctang/workspace/my_INTT/stability_monitor/
 
 until [ "${RunStart}" == "${RunEnd}" ]
 do
@@ -17,7 +17,7 @@ do
     then
         echo -e "${filename} exists! \n"
         echo -e "Running the hit_per_event.cc... \n"
-        root -l -q ${dir_code}/stability_monitor/hit_per_event.cc\(\"${filename}\"\)
+        root -l -q ${dir_code}/hit_per_event.cc\(\"${filename}\"\)
     else
         echo -e "${filename} doesn't exist! \n"
     fi

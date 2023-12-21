@@ -5,6 +5,6 @@
 
 file=$1
 
-scp /sphenix/u/wctang/workspace/${file} inttdaq:/home/inttdev/work/wctang/my_INTT/stability_monitor/
+scp /sphenix/u/wctang/workspace/my_INTT/stability_monitor/${file} inttdaq:/home/inttdev/work/wctang/my_INTT/stability_monitor/
 
 ssh inttdaq "cd /home/inttdev/work/wctang/my_INTT/stability_monitor; ./psql_test.sh 'test'; python3 reading_data.py"
