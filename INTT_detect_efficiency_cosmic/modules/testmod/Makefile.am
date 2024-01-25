@@ -8,22 +8,20 @@ AM_CPPFLAGS = \
 AM_LDFLAGS = \
   -L$(libdir) \
   -L$(OFFLINE_MAIN)/lib \
-  -ltrack_io \
   -L$(OFFLINE_MAIN)/lib64
 
 pkginclude_HEADERS = \
-  hot_channel_finder_wctang.h
+  testmod.h
 
 lib_LTLIBRARIES = \
-  libhot_channel_finder_wctang.la
+  libtestmod.la
 
-libhot_channel_finder_wctang_la_SOURCES = \
-  hot_channel_finder_wctang.cc
+libtestmod_la_SOURCES = \
+  testmod.cc
 
-libhot_channel_finder_wctang_la_LIBADD = \
+libtestmod_la_LIBADD = \
   -lphool \
-  -lSubsysReco \
-  -lffarawobjects
+  -lSubsysReco
 
 BUILT_SOURCES = testexternals.cc
 
@@ -31,7 +29,7 @@ noinst_PROGRAMS = \
   testexternals
 
 testexternals_SOURCES = testexternals.cc
-testexternals_LDADD   = libhot_channel_finder_wctang.la
+testexternals_LDADD   = libtestmod.la
 
 testexternals.cc:
 	echo "//*** this is a generated file. Do not commit, do not edit" > $@

@@ -1,6 +1,6 @@
 # Stability monitor
 database.ini
-__pycache__
+__pycache__/
 
 # Compiled Object files
 *.slo
@@ -28,5 +28,24 @@ __pycache__
 *.out
 *.app
 
+# Some config file
+*.in
+*.m4
+*.guess
+*.sub
+depcomp
+install-sh
+ltmain.sh
+missing
+.deps/
+.libs/
+autom4te.cache/
+config.log
+config.status
+libtool
+Makefile
+configure
+
 *~
 *.root
+*.log*
