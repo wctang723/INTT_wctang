@@ -58,7 +58,7 @@ def insert_vendor_list(vendor_list):
 
 def insert_event_num(event_num_name):
     """ The event_num_name must be a tuple"""
-    sql = '''INSERT INTO beam_run(run_number, event_num, hit_num)
+    sql = '''INSERT INTO NumOfHot(run_number, hot_num)
              VALUES%s;'''
     numbers = '%s' % (event_num_name,)
     ssql = sql % numbers

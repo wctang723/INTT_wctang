@@ -1,0 +1,106 @@
+%!PS-Adobe-2.0
+%%Title: Channel_raw_hit_dist_2D: c1
+%%Creator: ROOT Version 6.26/06
+%%CreationDate: Wed Jan 31 04:12:41 2024
+%%Orientation: Landscape
+%%EndComments
+%%BeginProlog
+/s {stroke} def /l {lineto} def /m {moveto} def /t {translate} def
+/r {rotate} def /rl {roll}  def /R {repeat} def
+/d {rlineto} def /rm {rmoveto} def /gr {grestore} def /f {eofill} def
+/c {setrgbcolor} def /black {0 setgray} def /sd {setdash} def
+/cl {closepath} def /sf {scalefont setfont} def /lw {setlinewidth} def
+/box {m dup 0 exch d exch 0 d 0 exch neg d cl} def
+/NC{systemdict begin initclip end}def/C{NC box clip newpath}def
+/bl {box s} def /bf {gsave box gsave f grestore 1 lw [] 0 sd s grestore} def /Y { 0 exch d} def /X { 0 d} def 
+/K {{pop pop 0 moveto} exch kshow} bind def
+/ita {/ang 15 def gsave [1 0 ang dup sin exch cos div 1 0 0] concat} def 
+/mp {newpath /y exch def /x exch def} def
+/side {[w .77 mul w .23 mul] .385 w mul sd w 0 l currentpoint t -144 r} def
+/mr {mp x y w2 0 360 arc} def /m24 {mr s} def /m20 {mr f} def
+/mb {mp x y w2 add m w2 neg 0 d 0 w neg d w 0 d 0 w d cl} def
+/mt {mp x y w2 add m w2 neg w neg d w 0 d cl} def
+/w4 {w 4 div} def
+/w6 {w 6 div} def
+/w8 {w 8 div} def
+/m21 {mb f} def /m25 {mb s} def /m22 {mt f} def /m26{mt s} def
+/m23 {mp x y w2 sub m w2 w d w neg 0 d cl f} def
+/m27 {mp x y w2 add m w3 neg w2 neg d w3 w2 neg d w3 w2 d cl s} def
+/m28 {mp x w2 sub y w2 sub w3 add m w3 0 d  0 w3 neg d w3 0 d 0 w3 d w3 0 d  0 w3 d w3 neg 0 d 0 w3 d w3 neg 0 d 0 w3 neg d w3 neg 0 d cl s } def
+/m29 {mp gsave x w2 sub y w2 add w3 sub m currentpoint t 4 {side} repeat cl fill gr} def
+/m30 {mp gsave x w2 sub y w2 add w3 sub m currentpoint t 4 {side} repeat cl s gr} def
+/m31 {mp x y w2 sub m 0 w d x w2 sub y m w 0 d x w2 .707 mul sub y w2 .707 mul add m w 1.44 div w 1.44 div neg d x w2 .707 mul sub y w2 .707 mul sub m w 1.44 div w 1.44 div d s} def
+/m32 {mp x y w2 sub m w2 w d w neg 0 d cl s} def
+/m33 {mp x y w2 add m w3 neg w2 neg d w3 w2 neg d w3 w2 d cl f} def
+/m34 {mp x w2 sub y w2 sub w3 add m w3 0 d  0 w3 neg d w3 0 d 0 w3 d w3 0 d  0 w3 d w3 neg 0 d 0 w3 d w3 neg 0 d 0 w3 neg d w3 neg 0 d cl f } def
+/m35 {mp x y w2 add m w2 neg w2 neg d w2 w2 neg d w2 w2 d w2 neg w2 d x y w2 sub m 0 w d x w2 sub y m w 0 d s} def
+/m36 {mb x w2 sub y w2 add m w w neg d x w2 sub y w2 sub m w w d s} def
+/m37 {mp x y m w4 neg w2 d w4 neg w2 neg d w2 0 d  w4 neg w2 neg d w2 0 d w4 neg w2 d w2 0 d w4 neg w2 d w4 neg w2 neg d cl s} def
+/m38 {mp x w4 sub y w2 add m w4 neg w4 neg d 0 w2 neg d w4 w4 neg d w2 0 d w4 w4 d 0 w2 d w4 neg w4 d w2 neg 0 d x y w2 sub m 0 w d x w2 sub y m w 0 d cl s} def
+/m39 {mp x y m w4 neg w2 d w4 neg w2 neg d w2 0 d  w4 neg w2 neg d w2 0 d w4 neg w2 d w2 0 d w4 neg w2 d w4 neg w2 neg d cl f} def
+/m40 {mp x y m w4 w2 d w4 w4 neg d w2 neg w4 neg d w2 w4 neg d w4 neg w4 neg d w4 neg w2 d w4 neg w2 neg d w4 neg w4 d w2 w4 d w2 neg w4 d w4 w4 d w4 w2 neg d cl s} def
+/m41 {mp x y m w4 w2 d w4 w4 neg d w2 neg w4 neg d w2 w4 neg d w4 neg w4 neg d w4 neg w2 d w4 neg w2 neg d w4 neg w4 d w2 w4 d w2 neg w4 d w4 w4 d w4 w2 neg d cl f} def
+/m42 {mp x y w2 add m w8 neg w2 -3 4 div mul d w2 -3 4 div mul w8 neg d w2 3 4 div mul w8 neg d w8 w2 -3 4 div mul d w8 w2 3 4 div mul d w2 3 4 div mul w8 d w2 -3 4 div mul w8 d w8 neg w2 3 4 div mul d cl s} def
+/m43 {mp x y w2 add m w8 neg w2 -3 4 div mul d w2 -3 4 div mul w8 neg d w2 3 4 div mul w8 neg d w8 w2 -3 4 div mul d w8 w2 3 4 div mul d w2 3 4 div mul w8 d w2 -3 4 div mul w8 d w8 neg w2 3 4 div mul d cl f} def
+/m44 {mp x y m w6 neg w2 d w2 2 3 div mul 0 d w6 neg w2 neg d w2 w6 d 0 w2 -2 3 div mul d w2 neg w6 d w6 w2 neg d w2 -2 3 div mul 0 d w6 w2 d w2 neg w6 neg d 0 w2 2 3 div mul d w2 w6 neg d cl s} def
+/m45 {mp x y m w6 neg w2 d w2 2 3 div mul 0 d w6 neg w2 neg d w2 w6 d 0 w2 -2 3 div mul d w2 neg w6 d w6 w2 neg d w2 -2 3 div mul 0 d w6 w2 d w2 neg w6 neg d 0 w2 2 3 div mul d w2 w6 neg d cl f} def
+/m46 {mp x y w4 add m w4 neg w4 d w4 neg w4 neg d  w4 w4 neg d w4 neg w4 neg d w4 w4 neg d w4 w4 d w4 w4 neg d w4 w4 d w4 neg w4 d w4 w4 d w4 neg w4 d w4 neg w4 neg d cl s} def
+/m47 {mp x y w4 add m w4 neg w4 d w4 neg w4 neg d w4 w4 neg d w4 neg w4 neg d  w4 w4 neg d w4 w4 d w4 w4 neg d w4 w4 d w4 neg w4 d w4 w4 d w4 neg w4 d w4 neg w4 neg d cl f} def
+/m48 {mp x y w4 add m w4 neg w4 d w4 neg w4 neg d w4 w4 neg d  w4 neg w4 neg d w4 w4 neg d w4 w4 d w4 w4 neg d w4 w4 d w4 neg w4 d w4 w4 d w4 neg w4 d w4 neg w4 neg d  w4 w4 neg d w4 neg w4 neg d w4 neg w4 d w4 w4 d cl f} def
+/m49 {mp x w2 sub w3 add y w2 sub w3 add m  0 w3 neg d w3 0 d 0 w3 d w3 0 d 0 w3 d w3 neg 0 d 0 w3 d w3 neg 0 d 0 w3 neg d w3 neg 0 d 0 w3 neg d w3 0 d 0 w3 d w3 0 d 0 w3 neg d w3 neg 0 d cl f } def
+/m2 {mp x y w2 sub m 0 w d x w2 sub y m w 0 d s} def
+/m5 {mp x w2 .707 mul sub y w2 .707 mul sub m w 1.44 div w 1.44 div d x w2 .707 mul sub y w2 .707 mul add m w 1.44 div w 1.44 div neg d s} def
+/reEncode {exch findfont dup length dict begin {1 index /FID eq  {pop pop} {def} ifelse } forall /Encoding exch def currentdict end dup /FontName get exch definefont pop } def [/Times-Bold /Times-Italic /Times-BoldItalic /Helvetica /Helvetica-Oblique
+ /Helvetica-Bold /Helvetica-BoldOblique /Courier /Courier-Oblique /Courier-Bold /Courier-BoldOblique /Times-Roman /AvantGarde-Book /AvantGarde-BookOblique /AvantGarde-Demi /AvantGarde-DemiOblique /Bookman-Demi /Bookman-DemiItalic /Bookman-Light
+ /Bookman-LightItalic /Helvetica-Narrow /Helvetica-Narrow-Bold /Helvetica-Narrow-BoldOblique /Helvetica-Narrow-Oblique /NewCenturySchlbk-Roman /NewCenturySchlbk-Bold /NewCenturySchlbk-BoldItalic /NewCenturySchlbk-Italic /Palatino-Bold
+ /Palatino-BoldItalic /Palatino-Italic /Palatino-Roman ] {ISOLatin1Encoding reEncode } forall/Zone {/iy exch def /ix exch def  ix 1 sub  3144 mul  1 iy sub  2224 mul t} def
+%%EndProlog
+%%BeginSetup
+%%EndSetup
+newpath  gsave  90 r 0 -594 t  28 20 t .25 .25 scale  gsave 
+%%Page: 1 1
+ gsave  gsave 
+ 1 1 Zone
+ gsave  0 0 t black[  ] 0 sd 3 lw 1 1 1 c 2634 2268 0 0 bf black 1 1 1 c 1897 1837 369 272 bf black 1897 1837 369 272 bl 1 1 1 c 0.977 0.977044 0.0583656 c 73 15 369 286 bf 73 15 442 286 bf 73 15 515 286 bf 73 15 588 286 bf 73 15 661 286 bf 73 15 734
+ 286 bf 72 15 807 286 bf 73 15 879 286 bf 73 15 952 286 bf 73 15 1025 286 bf 73 15 1098 286 bf 73 15 1171 286 bf 73 15 1244 286 bf 73 15 1317 286 bf 73 15 1390 286 bf 73 15 1463 286 bf 73 15 1536 286 bf 73 15 1609 286 bf 73 15 1682 286 bf 73 15 1755
+ 286 bf 73 15 1828 286 bf 73 15 1901 286 bf 73 15 1974 286 bf 73 15 2047 286 bf 73 15 2120 286 bf 73 15 2193 286 bf 73 14 369 301 bf 73 14 442 301 bf 73 14 515 301 bf 73 14 588 301 bf 73 14 661 301 bf 73 14 734 301 bf 72 14 807 301 bf 73 14 879 301
+ bf 73 14 952 301 bf 73 14 1025 301 bf 73 14 1098 301 bf 73 14 1171 301 bf 73 14 1244 301 bf 73 14 1317 301 bf 73 14 1390 301 bf 73 14 1463 301 bf 73 14 1536 301 bf 73 14 1609 301 bf 73 14 1682 301 bf 73 14 1755 301 bf 73 14 1828 301 bf 73 14 1901
+ 301 bf 73 14 1974 301 bf 73 14 2047 301 bf 73 14 2120 301 bf 73 14 2193 301 bf 73 15 369 315 bf 73 15 442 315 bf 73 15 515 315 bf 73 15 588 315 bf 73 15 661 315 bf 73 15 734 315 bf 72 15 807 315 bf 73 15 879 315 bf 73 15 952 315 bf 73 15 1025 315 bf
+ 73 15 1098 315 bf 73 15 1171 315 bf 73 15 1244 315 bf 73 15 1317 315 bf 73 15 1390 315 bf 73 15 1463 315 bf 73 15 1536 315 bf 73 15 1609 315 bf 73 15 1682 315 bf 73 15 1755 315 bf 73 15 1828 315 bf 73 15 1901 315 bf 73 15 1974 315 bf 73 15 2047 315
+ bf 73 15 2120 315 bf 73 15 2193 315 bf 73 14 369 330 bf 73 14 442 330 bf 73 14 515 330 bf 73 14 588 330 bf 73 14 661 330 bf 73 14 734 330 bf 72 14 807 330 bf 73 14 879 330 bf 73 14 952 330 bf 73 14 1025 330 bf 73 14 1098 330 bf 73 14 1171 330 bf 73
+ 14 1244 330 bf 73 14 1317 330 bf 73 14 1390 330 bf 73 14 1463 330 bf 73 14 1536 330 bf 73 14 1609 330 bf 73 14 1682 330 bf 73 14 1755 330 bf 73 14 1828 330 bf 73 14 1901 330 bf 73 14 1974 330 bf 73 14 2047 330 bf 73 14 2120 330 bf 73 14 2193 330 bf
+ 73 14 369 344 bf 73 14 442 344 bf 73 14 515 344 bf 73 14 588 344 bf 73 14 661 344 bf 73 14 734 344 bf 72 14 807 344 bf 73 14 879 344 bf 73 14 952 344 bf 73 14 1025 344 bf 73 14 1098 344 bf 73 14 1171 344 bf 73 14 1244 344 bf 73 14 1317 344 bf 73 14
+ 1390 344 bf 73 14 1463 344 bf 73 14 1536 344 bf 73 14 1609 344 bf 73 14 1682 344 bf 73 14 1755 344 bf 73 14 1828 344 bf 73 14 1901 344 bf 73 14 1974 344 bf 73 14 2047 344 bf 73 14 2120 344 bf 73 14 2193 344 bf 73 15 369 358 bf 73 15 442 358 bf 73 15
+ 515 358 bf 73 15 588 358 bf 73 15 661 358 bf 73 15 734 358 bf 72 15 807 358 bf 73 15 879 358 bf 73 15 952 358 bf 73 15 1025 358 bf 73 15 1098 358 bf 73 15 1171 358 bf 73 15 1244 358 bf 73 15 1317 358 bf 73 15 1390 358 bf 73 15 1463 358 bf 73 15 1536
+ 358 bf 73 15 1609 358 bf 73 15 1682 358 bf 73 15 1755 358 bf 73 15 1828 358 bf 73 15 1901 358 bf 73 15 1974 358 bf 73 15 2047 358 bf 73 15 2120 358 bf 73 15 2193 358 bf 73 14 369 373 bf 73 14 442 373 bf 73 14 515 373 bf 73 14 588 373 bf 73 14 661
+ 373 bf 73 14 734 373 bf 72 14 807 373 bf 73 14 879 373 bf 73 14 952 373 bf 73 14 1025 373 bf 73 14 1098 373 bf 73 14 1171 373 bf 73 14 1244 373 bf 73 14 1317 373 bf 73 14 1390 373 bf 73 14 1463 373 bf 73 14 1536 373 bf 73 14 1609 373 bf 73 14 1682
+ 373 bf 73 14 1755 373 bf 73 14 1828 373 bf 73 14 1901 373 bf 73 14 1974 373 bf 73 14 2047 373 bf 73 14 2120 373 bf 73 14 2193 373 bf 73 14 369 387 bf 73 14 442 387 bf 73 14 515 387 bf 73 14 588 387 bf 73 14 661 387 bf 73 14 734 387 bf 72 14 807 387
+ bf 73 14 879 387 bf 73 14 952 387 bf 73 14 1025 387 bf 73 14 1098 387 bf 73 14 1171 387 bf 73 14 1244 387 bf 73 14 1317 387 bf 73 14 1390 387 bf 73 14 1463 387 bf 73 14 1536 387 bf 73 14 1609 387 bf 73 14 1682 387 bf 73 14 1755 387 bf 73 14 1828 387
+ bf 73 14 1901 387 bf 73 14 1974 387 bf 73 14 2047 387 bf 73 14 2120 387 bf 73 14 2193 387 bf 73 15 369 401 bf 73 15 442 401 bf 73 15 515 401 bf 73 15 588 401 bf 73 15 661 401 bf 73 15 734 401 bf 72 15 807 401 bf 73 15 879 401 bf 73 15 952 401 bf 73
+ 15 1025 401 bf 73 15 1098 401 bf 73 15 1171 401 bf 73 15 1244 401 bf 73 15 1317 401 bf 73 15 1390 401 bf 73 15 1463 401 bf 73 15 1536 401 bf 73 15 1609 401 bf 73 15 1682 401 bf 73 15 1755 401 bf 73 15 1828 401 bf 73 15 1901 401 bf 73 15 1974 401 bf
+ 73 15 2047 401 bf 73 15 2120 401 bf 73 15 2193 401 bf 73 14 369 416 bf 73 14 442 416 bf 73 14 515 416 bf 73 14 588 416 bf 73 14 661 416 bf 73 14 734 416 bf 72 14 807 416 bf 73 14 879 416 bf 73 14 952 416 bf 73 14 1025 416 bf 73 14 1098 416 bf 73 14
+ 1171 416 bf 73 14 1244 416 bf 73 14 1317 416 bf 73 14 1390 416 bf 73 14 1463 416 bf 73 14 1536 416 bf 73 14 1609 416 bf 73 14 1682 416 bf 73 14 1755 416 bf 73 14 1828 416 bf 73 14 1901 416 bf 73 14 1974 416 bf 73 14 2047 416 bf 73 14 2120 416 bf 73
+ 14 2193 416 bf 73 14 369 430 bf 73 14 442 430 bf 73 14 515 430 bf 73 14 588 430 bf 73 14 661 430 bf 73 14 734 430 bf 72 14 807 430 bf 73 14 879 430 bf 73 14 952 430 bf 73 14 1025 430 bf 73 14 1098 430 bf 73 14 1171 430 bf 73 14 1244 430 bf 73 14
+ 1317 430 bf 73 14 1390 430 bf 73 14 1463 430 bf 73 14 1536 430 bf 73 14 1609 430 bf 73 14 1682 430 bf 73 14 1755 430 bf 73 14 1828 430 bf 73 14 1901 430 bf 73 14 1974 430 bf 73 14 2047 430 bf 73 14 2120 430 bf 73 14 2193 430 bf 73 15 369 444 bf 73
+ 15 442 444 bf 73 15 515 444 bf 73 15 588 444 bf 73 15 661 444 bf 73 15 734 444 bf 72 15 807 444 bf 73 15 879 444 bf 73 15 952 444 bf 73 15 1025 444 bf 73 15 1098 444 bf 73 15 1171 444 bf 73 15 1244 444 bf 73 15 1317 444 bf 73 15 1390 444 bf 73 15
+ 1463 444 bf 73 15 1536 444 bf 73 15 1609 444 bf 73 15 1682 444 bf 73 15 1755 444 bf 73 15 1828 444 bf 73 15 1901 444 bf 73 15 1974 444 bf 73 15 2047 444 bf 73 15 2120 444 bf 73 15 2193 444 bf 73 14 369 459 bf 73 14 442 459 bf 73 14 515 459 bf 73 14
+ 588 459 bf 73 14 661 459 bf 73 14 734 459 bf 72 14 807 459 bf 73 14 879 459 bf 73 14 952 459 bf 73 14 1025 459 bf 73 14 1098 459 bf 73 14 1171 459 bf 73 14 1244 459 bf 73 14 1317 459 bf 73 14 1390 459 bf 73 14 1463 459 bf 73 14 1536 459 bf 73 14
+ 1609 459 bf 73 14 1682 459 bf 73 14 1755 459 bf 73 14 1828 459 bf 73 14 1901 459 bf 73 14 1974 459 bf 73 14 2047 459 bf 73 14 2120 459 bf 73 14 2193 459 bf 73 14 369 473 bf 73 14 442 473 bf 73 14 515 473 bf 73 14 588 473 bf 73 14 661 473 bf 73 14
+ 734 473 bf 72 14 807 473 bf 73 14 879 473 bf 73 14 952 473 bf 73 14 1025 473 bf 73 14 1098 473 bf 73 14 1171 473 bf 73 14 1244 473 bf 73 14 1317 473 bf 73 14 1390 473 bf 73 14 1463 473 bf 73 14 1536 473 bf 73 14 1609 473 bf 73 14 1682 473 bf 73 14
+ 1755 473 bf 73 14 1828 473 bf 73 14 1901 473 bf 73 14 1974 473 bf 73 14 2047 473 bf 73 14 2120 473 bf 73 14 2193 473 bf 73 15 369 487 bf 73 15 442 487 bf 73 15 515 487 bf 73 15 588 487 bf 73 15 661 487 bf 73 15 734 487 bf 72 15 807 487 bf 73 15 879
+ 487 bf 73 15 952 487 bf 73 15 1025 487 bf 73 15 1098 487 bf 73 15 1171 487 bf 73 15 1244 487 bf 73 15 1317 487 bf 73 15 1390 487 bf 73 15 1463 487 bf 73 15 1536 487 bf 73 15 1609 487 bf 73 15 1682 487 bf 73 15 1755 487 bf 73 15 1828 487 bf 73 15
+ 1901 487 bf 73 15 1974 487 bf 73 15 2047 487 bf 73 15 2120 487 bf 73 15 2193 487 bf 73 14 369 502 bf 73 14 442 502 bf 73 14 515 502 bf 73 14 588 502 bf 73 14 661 502 bf 73 14 734 502 bf 72 14 807 502 bf 73 14 879 502 bf 73 14 952 502 bf 73 14 1025
+ 502 bf 73 14 1098 502 bf 73 14 1171 502 bf 73 14 1244 502 bf 73 14 1317 502 bf 73 14 1390 502 bf 73 14 1463 502 bf 73 14 1536 502 bf 73 14 1609 502 bf 73 14 1682 502 bf 73 14 1755 502 bf 73 14 1828 502 bf 73 14 1901 502 bf 73 14 1974 502 bf 73 14
+ 2047 502 bf 73 14 2120 502 bf 73 14 2193 502 bf 73 14 369 516 bf 73 14 442 516 bf 73 14 515 516 bf 73 14 588 516 bf 73 14 661 516 bf 73 14 734 516 bf 72 14 807 516 bf 73 14 879 516 bf 73 14 952 516 bf 73 14 1025 516 bf 73 14 1098 516 bf 73 14 1171
+ 516 bf 73 14 1244 516 bf 73 14 1317 516 bf 73 14 1390 516 bf 73 14 1463 516 bf 73 14 1536 516 bf 73 14 1609 516 bf 73 14 1682 516 bf 73 14 1755 516 bf 73 14 1828 516 bf 73 14 1901 516 bf 73 14 1974 516 bf 73 14 2047 516 bf 73 14 2120 516 bf 73 14
+ 2193 516 bf 73 15 369 530 bf 73 15 442 530 bf 73 15 515 530 bf 73 15 588 530 bf 73 15 661 530 bf 73 15 734 530 bf 72 15 807 530 bf 73 15 879 530 bf 73 15 952 530 bf 73 15 1025 530 bf 73 15 1098 530 bf 73 15 1171 530 bf 73 15 1244 530 bf 73 15 1317
+ 530 bf 73 15 1390 530 bf 73 15 1463 530 bf 73 15 1536 530 bf 73 15 1609 530 bf 73 15 1682 530 bf 73 15 1755 530 bf 73 15 1828 530 bf 73 15 1901 530 bf 73 15 1974 530 bf 73 15 2047 530 bf 73 15 2120 530 bf 73 15 2193 530 bf 73 14 369 545 bf 73 14 442
+ 545 bf 73 14 515 545 bf 73 14 588 545 bf 73 14 661 545 bf 73 14 734 545 bf 72 14 807 545 bf 73 14 879 545 bf 73 14 952 545 bf 73 14 1025 545 bf 73 14 1098 545 bf 73 14 1171 545 bf 73 14 1244 545 bf 73 14 1317 545 bf 73 14 1390 545 bf 73 14 1463 545
+ bf 73 14 1536 545 bf 73 14 1609 545 bf 73 14 1682 545 bf 73 14 1755 545 bf 73 14 1828 545 bf 73 14 1901 545 bf 73 14 1974 545 bf 73 14 2047 545 bf 73 14 2120 545 bf 73 14 2193 545 bf 73 14 369 559 bf 73 14 442 559 bf 73 14 515 559 bf 73 14 588 559
+ bf 73 14 661 559 bf 73 14 734 559 bf 72 14 807 559 bf 73 14 879 559 bf 73 14 952 559 bf 73 14 1025 559 bf 73 14 1098 559 bf 73 14 1171 559 bf 73 14 1244 559 bf 73 14 1317 559 bf 73 14 1390 559 bf 73 14 1463 559 bf 73 14 1536 559 bf 73 14 1609 559 bf
+ 73 14 1682 559 bf 73 14 1755 559 bf 73 14 1828 559 bf 73 14 1901 559 bf 73 14 1974 559 bf 73 14 2047 559 bf 73 14 2120 559 bf 73 14 2193 559 bf 73 15 369 573 bf 73 15 442 573 bf 73 15 515 573 bf 73 15 588 573 bf 73 15 661 573 bf 73 15 734 573 bf 72
+ 15 807 573 bf 73 15 879 573 bf 73 15 952 573 bf 73 15 1025 573 bf 73 15 1098 573 bf 73 15 1171 573 bf 73 15 1244 573 bf 73 15 1317 573 bf 73 15 1390 573 bf 73 15 1463 573 bf 73 15 1536 573 bf 73 15 1609 573 bf 73 15 1682 573 bf 73 15 1755 573 bf 73
+ 15 1828 573 bf 73 15 1901 573 bf 73 15 1974 573 bf 73 15 2047 573 bf 73 15 2120 573 bf 73 15 2193 573 bf 73 14 369 588 bf 73 14 442 588 bf 73 14 515 588 bf 73 14 588 588 bf 73 14 661 588 bf 73 14 734 588 bf 72 14 807 588 bf 73 14 879 588 bf 73 14
+ 952 588 bf 73 14 1025 588 bf 73 14 1098 588 bf 73 14 1171 588 bf 73 14 1244 588 bf 73 14 1317 588 bf 73 14 1390 588 bf 73 14 1463 588 bf 73 14 1536 588 bf 73 14 1609 588 bf 73 14 1682 588 bf 73 14 1755 588 bf 73 14 1828 588 bf 73 14 1901 588 bf 73
+ 14 1974 588 bf 73 14 2047 588 bf 73 14 2120 588 bf 73 14 2193 588 bf 73 15 369 602 bf 73 15 442 602 bf 73 15 515 602 bf 73 15 588 602 bf 73 15 661 602 bf 73 15 734 602 bf 72 15 807 602 bf 73 15 879 602 bf 73 15 952 602 bf 73 15 1025 602 bf 73 15
+ 1098 602 bf 73 15 1171 602 bf 73 15 1244 602 bf 73 15 1317 602 bf 73 15 1390 602 bf 73 15 1463 602 bf 73 15 1536 602 bf 73 15 1609 602 bf 73 15 1682 602 bf 73 15 1755 602 bf 73 15 1828 602 bf 73 15 1901 602 bf 73 15 1974 602 bf 73 15 2047 602 bf 73

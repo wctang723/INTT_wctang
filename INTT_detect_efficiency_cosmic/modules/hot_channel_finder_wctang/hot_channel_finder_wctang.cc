@@ -69,7 +69,7 @@ hot_channel_finder_wctang::hot_channel_finder_wctang(const std::string &name):
 	SubsysReco(name),
 	output_(nullptr)
 {
-	output_name_ = "hot_channel_find_test.root";
+	output_name_ = "hot_channel_find_cosmic.root";
 	std::cout << "hot_channel_finder_wctang::hot_channel_finder_wctang(const std::string &name) Calling ctor" << std::endl;
 }
 
@@ -89,6 +89,11 @@ int hot_channel_finder_wctang::Init(PHCompositeNode *topNode)
 	hist_hit_num_ = new TH1D( "hist_hit_num_","#INTTRAWHIT;The number of INTTRAWHIT;Entries", 50, 0, 40000 );
 	//hist_cluster_ = new TH1D("hist_cluster", "Number of cluster distribution;#Cluster;Entries", 100, 0, 100);
 	hist_chanhit_2Dmap_ = new TH2D("hist_chanhit_2Dmap_","RawHit map", 26, 1, 27, 128, 0, 127);
+	c1 = new TCanvas("c1", "c1", 900, 800);
+	gPad->SetTopMargin(0.07);
+    gPad->SetBottomMargin(0.12);
+    gPad->SetLeftMargin(0.14);
+    gPad->SetRightMargin(0.14);
 
 	tree_ = new TTree( "tree_INTT_raw_hit", "TTree for INTTRAWHIT information" );
 	tree_->Branch( "pid", &pid_, "pid/I" );
@@ -201,18 +206,24 @@ int hot_channel_finder_wctang::process_event(PHCompositeNode *topNode)
 
 	int hit_num = node_inttrawhit_map->get_nhits();
   	cout << "# of INTTRAWHIT: " << hit_num << endl;
-	cout << "pid: " << "bco_full: " << "felix module: " << "chip_id: " << "chan_id: " << "adc: " << "bco: " << "diff: " << endl;
+	cout << "pid : " << "bco_full : " << "felix module : " << "chip_id : " << "chan_id : " << "adc : " << "bco : " << "diff " << endl;
 	
-	int ladder_number = 0;
+	int ladder_number;
+	int ch_hit_arr[8][14][26][128];		// store hit numbers (added by every event)
+	memset(ch_hit_arr, -1, sizeof(ch_hit_arr));
 
-	for( int i=0; i<hit_num; i++ ) {
+	//hist_chanhit_2Dmap_ = new TH2D("hist_chanhit_2Dmap_","RawHit map", 26, 1, 27, 128, 0, 127);
+
+
+	for (int i=0; i<hit_num; i++) {
 		InttRawHit* hit = node_inttrawhit_map->get_hit( i );
 
 		// Get and assign hit information
-		pid_ = hit->get_packetid();
-		fee_ = hit->get_fee();
-		chip_id_ = hit->get_chip_id();
-		chan_id_ = hit->get_channel_id();
+		pid_ = hit->get_packetid();					// pid: 3001~3008
+		fee_ = hit->get_fee();						// felix mod: 0~13
+		int chip_id_raw = hit->get_chip_id();		// chip id: 1~26
+		if (chip_id_raw < 27) {chip_id_ = chip_id_raw;} else {chip_id_ = chip_id_raw - 26;} // get the real chip id
+		chan_id_ = hit->get_channel_id();			// chan id: 0~127
 		bco_full_ = hit->get_bco();
 		bco_ = hit->get_FPHX_BCO();
 		diff_ = abs( (bco_full_ & 0x7f) - bco_ );
@@ -220,26 +231,26 @@ int hot_channel_finder_wctang::process_event(PHCompositeNode *topNode)
 		// Filling TTree
       	tree_->Fill();
 
-		//ladder_number = pid_ * (fee_ + 1);
-
-		//hist_chanhit_2Dmap_->Fill(chip_id, chan_id);
-
-		if ( pid_ = 3001)
+		ladder_number = ((pid_ - 3000)* 100) + (fee_ + 1);
+		ch_hit_arr[pid_-3001][fee_][chip_id_-1][chan_id_] += 1;
+		
 		
 		cout
 		<< std::setw(  1 ) << hit->get_packetid() << " "   // FELIX server
 		<< std::setw( 12 ) << hit->get_bco() << " "        // so_called bco_full
 		// << std::setw( 10 ) << hit->get_word() << " "    // the data from FELIX
-		<< std::setw(  2 ) << hit->get_fee() << " "        // module or felix ch
+		<< std::setw(  7 ) << hit->get_fee() << " "        // module or felix ch
 		<< std::setw( 10 ) << hit->get_chip_id() << " "    // chip ID
-		<< std::setw(  3 ) << hit->get_channel_id() << " " // channel ID
-		<< std::setw(  1 ) << hit->get_adc() << " "        // ADC
+		<< std::setw(  7 ) << hit->get_channel_id() << " " // channel ID
+		<< std::setw(  5 ) << hit->get_adc() << " "        // ADC
 		<< std::setw(  3 ) << hit->get_FPHX_BCO() << " "   // bco (hit bco, from 0 - 127)
 		<< std::setw(  3 ) << (hit->get_bco()&0x7f) - hit->get_FPHX_BCO() // the BCO difference
 		// << std::setw(  1 ) << hit->get_full_FPHX() << " " // ?
 		// << std::setw(  1 ) << hit->get_full_ROC() << " " // ?
 		// << std::setw(  2 ) << hit->get_amplitude() << " " // only for calibration
 		<< endl;
+
+		cout << "ladder number: " << ladder_number << endl;
     }  
 
 	// Filling histogram
@@ -267,9 +278,28 @@ int hot_channel_finder_wctang::End(PHCompositeNode *topNode)
 {
 	std::cout << "hot_channel_finder_wctang::End(PHCompositeNode *topNode) This is the End..." << std::endl;
 
-	// Writing the objects to the output file
-	//output_->WriteTObject(hist_cluster_, hist_cluster_->GetName());
-	//output_->Close();
+
+	for (int i0 = 0; i0 < 8; i0++) {					// i0 is pid
+		for (int i1 = 0; i1 < 14; i1++){				// i1 is felix module
+			for (int i2 = 0; i2 < 26; i2++){			// i2 is chip_id - 1
+				for (int i3 = 0; i3 < 128; i3++){		// i3 is channel_id
+					hist_chanhit_2Dmap_->Fill(i3, i2+1);
+				}
+			}
+
+			// loop over every ladders (pid & felix module)
+			c1->cd();
+			hist_chanhit_2Dmap_->SetTitle(Form("intt%i-%i", i0, i1));
+			hist_chanhit_2Dmap_->Draw("colz0");
+			c1->Print("Channel_raw_hit_dist_2D.pdf");
+			hist_chanhit_2Dmap_->Reset("ICESM");
+			c1->Clear();
+		}
+	}
+	c1->cd();
+	c1->Print("Channel_raw_hit_dist_2D");
+	c1->Clear();
+
 
 	output_->WriteTObject( hist_hit_num_, hist_hit_num_->GetName() );
 	output_->WriteTObject( tree_, tree_->GetName() );

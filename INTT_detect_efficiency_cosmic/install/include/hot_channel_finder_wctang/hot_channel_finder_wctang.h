@@ -22,6 +22,7 @@
 #include <TH2.h>
 #include <TNtuple.h>
 #include <TTree.h>
+#include <TCanvas.h>
 #include <Math/Vector3Dfwd.h>
 
 class PHCompositeNode;
@@ -75,7 +76,9 @@ private:
   TFile *output_;
   TH1D *hist_hit_num_;
   TH1D *hist_rawhit_dist_;
-  TH2D *hist_chanhit_2Ddist_; // Ladder by ladder hit map
+  TH2D *hist_chanhit_2Dmap_; // Ladder by ladder hit map
+  TCanvas *c1;
+
   TTree *tree_;
   int pid_; // Packet ID, i.e. FELIX server ID
   int fee_;

@@ -48,13 +48,12 @@ def create_tables():
         """
     )
 
-    commands_2 =  """
-        CREATE TABLE beam_run(
+    commands_2 =  
+        CREATE TABLE NumOfHot(
             run_number int,
-            event_num int,
-            hit_num float
+            hot_num float
         )
-        """
+    
 
     conn = None
     try:
