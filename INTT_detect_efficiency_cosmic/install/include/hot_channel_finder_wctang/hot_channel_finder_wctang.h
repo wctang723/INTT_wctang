@@ -80,6 +80,11 @@ private:
   TCanvas *c1;
 
   TTree *tree_;
+  int ch_hit_arr[8][14][26][128];		// store hit numbers (added by every event)
+  double standard_ch_ratio_typeA = 1. / (8*14*16*128);
+  double standard_ch_ratio_typeB = 1. / (8*14*10*128);
+  int clonehit_num;
+
   int pid_; // Packet ID, i.e. FELIX server ID
   int fee_;
   int chip_id_;
