@@ -52,16 +52,16 @@ public:
          This is where you do the real work. */
     int process_event(PHCompositeNode *topNode) override;
 
-    //* Clean up internals after each event.
+    /// Clean up internals after each event.
     int ResetEvent(PHCompositeNode *topNode) override;
 
-    //* Called at the end of each run.
+    /// Called at the end of each run.
     int EndRun(const int runnumber) override;
 
-    //* Called at the end of all processing.
+    /// Called at the end of all processing.
     int End(PHCompositeNode *topNode) override;
 
-    //* Reset
+    /// Reset
     int Reset(PHCompositeNode * /*topNode*/) override;
 
     void Print(const std::string &what = "ALL") const override;
@@ -73,23 +73,48 @@ private:
     std::string output_name_;
     TFile *output_;
     TH1D *hist_hit_num_;
-    TH1D *hist_rawhit_dist_;
-    TH2D *hist_chanhit_2Dmap_;            //* Ladder by ladder hit map
+    TH1D *h1_hist_nor_A[8][14];         /// for hit distribution after normalize of type A sensor
+    TH1D *h1_hist_nor_B[8][14];         /// for hit distribution after normalize of type B sensor
+    TH1D *h1_hist_raw_A[8][14];         /// for raw hit distribution of type A sensor
+    TH1D *h1_hist_raw_B[8][14];         /// for raw hit distribution of type B sensor
+    TH1D *h1_hist_integral_nor_A;		/// for hit distribution that add up all the hit for type A
+    TH1D *h1_hist_integral_nor_B;		/// for hit distribution that add up all the hit for type B
+    TH1D *h1_hist_integral_raw_A;		/// for hit distribution that add up all the hit for type A
+    TH1D *h1_hist_integral_raw_B;		/// for hit distribution that add up all the hit for type B
+    TH1D *h1_hist_chip;                 /// # of hit per a chip distribution
+    TH1D *hist_rawhit_dist_;			/// Hit number per event
+    TH2D *hist_chanhit_2Dmap_[8][14];	/// Ladder by ladder hit map
+    TH2D *hist_chiphit_2Dmap_[8];       /// module by module hit map
+    
+
+	//double SingleGaussianFit;
+	//void GetFirstFilledBinCenter;
+
+	//double HotChannelCut_A_Fit[8][14];
+	//double HotChannelCut_B_Fit[8][14];
+	//double ColdChannelCut_A_Fit[8][14];
+	//double ColdChannelCut_B_Fit[8][14];
+	//double par_meanA[8][14];  /// Array to save the mean & sigma value, [0][module] = mean, [1][module] = sigma
+	//double par_sigmaA[8][14]; /// Array to save the mean & sigma value, [0][module] = mean, [1][module] = sigma
+	//double par_meanB[8][14];  /// Array to save the mean & sigma value, [0][module] = mean, [1][module] = sigma
+	//double par_sigmaB[8][14]; /// Array to save the mean & sigma value, [0][module] = mean, [1][module] = sigma
+
+    int evtnum;
+    int chan_hit_arr[8][14][26][128];		/// store hit numbers channel by channel (added by every event)
+    int chip_hit_arr[8][14][26];        	/// store the hit number chip by chip 
+    int clonehit_num;
+    
+    TCanvas *c0;
     TCanvas *c1;
 
     TTree *tree_;
-    int ch_hit_arr[8][14][26][128];       //* store hit numbers (added by every event)
-    double standard_ch_ratio_typeA = 1. / (8*14*16*128);
-    double standard_ch_ratio_typeB = 1. / (8*14*10*128);
-    int clonehit_num;
-
-    int pid_;			//* Packet ID, i.e. FELIX server ID
+    int pid_;			/// Packet ID, i.e. FELIX server ID
     int fee_;
     int chip_id_;
     int chan_id_;
-    Long64_t bco_full_;	//* Because bco_full is very large, int cannot keep all infomation. 
+    Long64_t bco_full_;	/// Because bco_full is very large, int cannot keep all infomation. 
     int bco_;
-    int diff_;			//* The well-used BCO difference: (The lower 7 bits of bco_full) - (hit BCO)
+    int diff_;			/// The well-used BCO difference: (The lower 7 bits of bco_full) - (hit BCO)
 };
 
-#endif //* HOT_CHANNEL_FINDER_WCTANG_H
+#endif /// HOT_CHANNEL_FINDER_WCTANG_H

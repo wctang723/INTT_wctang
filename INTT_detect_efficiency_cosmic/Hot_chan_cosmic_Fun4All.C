@@ -48,9 +48,6 @@ int Hot_chan_cosmic_Fun4All (
 	Fun4AllInputManager *in = new Fun4AllDstInputManager("DSTin");
 	in->fileopen(inputFile);
 	se->registerInputManager(in);
-
-	// InttRawHitv1 *intthit = new INTTRawHitv1();
-
 	
 	hot_channel_finder_wctang *analysis_module = new hot_channel_finder_wctang("name");
 	se->registerSubsystem(analysis_module);
