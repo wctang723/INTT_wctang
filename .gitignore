@@ -46,6 +46,10 @@ libtool
 Makefile
 configure
 
+# Some output file
+*.pdf
+output_files/
+
 *~
 *.root
 *.log*
