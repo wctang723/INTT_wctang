@@ -48,12 +48,14 @@ def create_tables():
         """
     )
 
-    commands_2 =  
+    commands_2 = ( 
+        '''
         CREATE TABLE NumOfHot(
             run_number int,
             hot_num float
         )
-    
+        '''
+    )
 
     conn = None
     try:
