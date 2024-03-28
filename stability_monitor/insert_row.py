@@ -5,7 +5,7 @@ from config import config
 
 
 def insert_vendor(vendor_name):
-    """ insert a new vendor into the vendors table """
+    ''' Insert a new vendor into the vendors table '''
     sql = """INSERT INTO vendors(vendor_name)
              VALUES(%s) RETURNING vendor_id;"""
     conn = None
@@ -34,7 +34,7 @@ def insert_vendor(vendor_name):
     return vendor_id
 
 def insert_vendor_list(vendor_list):
-    """ insert multiple vendors into the vendors table  """
+    ''' Insert multiple vendors into the vendors table '''
     sql = "INSERT INTO vendors(vendor_name) VALUES(%s)"
     conn = None
     try:
@@ -57,9 +57,9 @@ def insert_vendor_list(vendor_list):
             conn.close()
 
 def insert_event_num(event_num_name):
-    """ The event_num_name must be a tuple"""
-    sql = '''INSERT INTO beam_run(run_number, event_num, hit_num)
-             VALUES%s;'''
+    ''' The event_num_name must be a tuple '''
+    sql = """INSERT INTO beam_run(run_number, event_num, hit_num)
+             VALUES%s;"""
     numbers = '%s' % (event_num_name,)
     ssql = sql % numbers
 

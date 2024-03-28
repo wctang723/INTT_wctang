@@ -5,7 +5,7 @@ from config import config
 
 
 def create_tables():
-    """ create tables in the PostgreSQL database"""
+    """create tables in the PostgreSQL database"""
     commands = (
         
         """
@@ -16,7 +16,7 @@ def create_tables():
         """,
         
         """
-        CREATE TABLE parts (                    
+        CREATE TABLE parts ( 
                 part_id SERIAL PRIMARY KEY,     
                 part_name VARCHAR(255) NOT NULL 
         )
@@ -37,7 +37,7 @@ def create_tables():
         CREATE TABLE vendor_parts (                     
                 vendor_id INTEGER NOT NULL,             
                 part_id INTEGER NOT NULL,               
-                PRIMARY KEY (vendor_id , part_id),      
+                PRIMARY KEY (vendor_id , part_id), 
                 FOREIGN KEY (vendor_id)                 
                     REFERENCES vendors (vendor_id)      
                     ON UPDATE CASCADE ON DELETE CASCADE,
