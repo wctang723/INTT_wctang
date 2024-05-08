@@ -45,6 +45,7 @@ config.status
 libtool
 Makefile
 configure
+*.ini
 
 # Some output file
 *.pdf

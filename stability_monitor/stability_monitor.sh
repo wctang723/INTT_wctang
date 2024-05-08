@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # README
-# This is the script for sending file from SDCC to inttdaq and excute some command in inttdaq
+# This is the script for sending file from SDCC to inttdaq and excute the command in inttdaq
 
 file=$1
 
