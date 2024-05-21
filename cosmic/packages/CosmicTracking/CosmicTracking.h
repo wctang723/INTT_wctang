@@ -94,7 +94,6 @@ public:
   void SetYear( int year ){ year_ = year;};
   // void SetData( string path = "" );
   void SetOutputPath( string path );
-;
 
 private:
   //* variables
@@ -108,6 +107,7 @@ private:
   string output_hitmap_pdf_file_ = "";
   string output_txt_file_ = "";
   int misc_counter_ = 0;
+  int selected_event_number;
   bool is_magnet_ = false;
   
   //* objects
@@ -197,6 +197,7 @@ private:
   void InitPaths();
   std::string Int2Coordinate( int num );
   int MakeGraphs( vector < TrkrCluster* >& clusters );
+  int HitMapCheck( vector < TrkrCluster* > &clusters );
   int ProcessEventRawHit();
 };
 

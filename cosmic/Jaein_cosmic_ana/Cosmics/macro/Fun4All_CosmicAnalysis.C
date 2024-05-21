@@ -1,9 +1,9 @@
 #include "Fun4All_CosmicAnalysis.hh"
 
-const string &inputFile = "/sphenix/u/wctang/workspace/my_INTT/INTT_detect_efficiency_cosmic/DST_files/data/dst_files/2024/DST_cosmics_intt_00039468_50000events_no_hot_clusterized.root";
+const string &inputFile = "/sphenix/u/wctang/workspace/my_INTT/cosmic/DST_files/data/dst_files/2024/DST_cosmics_intt_00039524_10000events_no_hot_clusterized.root";
 int Fun4All_CosmicAnalysis(
-    int run_num = 39468,
-    int nEvents = 50000, 
+    int run_num = 39524,
+    int nEvents = 10000, 
     const int skip = 0)
 {
 
@@ -36,7 +36,7 @@ int Fun4All_CosmicAnalysis(
       + "_no_hot_clusterized.root";
     */
 
-    cout << inputFile << endl;
+    cout << "Input file name: " << inputFile << endl;
 
     INPUTREADHITS::filename[0] = inputFile;
 
@@ -93,6 +93,7 @@ int Fun4All_CosmicAnalysis(
 
     // Initialize the selected subsystems
     G4Init();
+    std::cout << "Something stucks here..." << std::endl;
 
     // GEANT4 Detector description
     if (!Input::READHITS) G4Setup();
@@ -120,6 +121,7 @@ int Fun4All_CosmicAnalysis(
     //  qicc->SetData( inputFile );
     //  se->registerSubsystem( qicc );
 
+    std::cout << "Here starts the tracking module..." << std::endl;
     se->skip(skip);
     se->run(nEvents);
     se->End();

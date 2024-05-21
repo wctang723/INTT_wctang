@@ -4,7 +4,7 @@
   @brief A macro to creat a hot channel map using a hitmap
   @author J. Hwang (Korea Univ.)
  */
-void InttChannelClassifier_cosmics(int runnumber = 39468) //runnumber
+void InttChannelClassifier_cosmics(int runnumber = 39524) //runnumber
 {
   
   

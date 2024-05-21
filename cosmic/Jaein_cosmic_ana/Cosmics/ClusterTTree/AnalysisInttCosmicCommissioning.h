@@ -60,7 +60,7 @@ private:
   
   //* objects
   TCanvas* c_;
-  TCanvas* c_hitmap_;
+  //TCanvas* c_hitmap_; //* by wctang
   TFile* outFile_;
   TTree* outTree_;
   
@@ -85,7 +85,7 @@ private:
   
   //* TGraphs
   TGraphErrors* graphs_[4]; // 0: xy, 1: zy, 2: zx 3: zr
-  TH2D* g_hitmap_; 
+  //TH2D* g_hitmap_; //* by wctang
   
   //* TF1
   TF1* lines_[4];

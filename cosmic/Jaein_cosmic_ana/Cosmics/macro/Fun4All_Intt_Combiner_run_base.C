@@ -39,7 +39,7 @@ void ShowHelp()
 }
 
 //void Fun4All_Intt_Combiner_run_base(int nEvents = 10, int run_oum = 26975 )
-void Fun4All_Intt_Combiner_run_base( int run_num = 39468, int nEvents = 50000, bool use_cdb = false, bool is_debug = true )
+void Fun4All_Intt_Combiner_run_base( int run_num = 39524, int nEvents = 10000, bool use_cdb = false, bool is_debug = true )
 {
   if( is_debug == true )
     ShowHelp();

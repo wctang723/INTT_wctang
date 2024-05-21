@@ -1,8 +1,8 @@
 #include "Fun4All_Clustering.hh"
 
 int Fun4All_Clustering(
-		     int run_num = 39468,
-		     int nEvents = 50000, //5,
+		     int run_num = 39524,
+		     int nEvents = 10000, //5,
 		     const int skip = 0
 		     )
 {

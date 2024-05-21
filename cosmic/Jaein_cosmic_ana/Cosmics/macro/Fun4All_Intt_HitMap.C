@@ -26,9 +26,9 @@ R__LOAD_LIBRARY(libfun4allraw.so)
 R__LOAD_LIBRARY(libffarawmodules.so)
 R__LOAD_LIBRARY(libinttcosmicshotmap.so)
 
-void Fun4All_Intt_HitMap(int run_num = 39468,
-			 int nevents = 50000,
-			 std::string in_file = "/direct/sphenix+tg+tg01/commissioning/INTT/work/weiche/my_INTT/INTT_detect_efficiency_cosmic/InttProduction/ProdDST/intt-00039468.root")
+void Fun4All_Intt_HitMap(int run_num = 39524,
+			 int nevents = 5000,
+			 std::string in_file = "/direct/sphenix+tg+tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/InttProduction/ProdDST/intt-00039524.root")
 {
         Fun4AllServer *se = Fun4AllServer::instance();
         // se->Verbosity(5);

@@ -39,7 +39,7 @@ bool isGood(const string &infile)
 }
 
 void Fun4All_Intt_Combiner(int nEvents = 50000,
-                           const int runnumber = 39468,
+                           const int runnumber = 39524,
                            const string cdbglobaltag = "ProdA_2024",
                            const bool runTrkrHits = false,
                            const bool applyHotChannel = false,
