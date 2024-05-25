@@ -38,8 +38,8 @@ bool isGood(const string &infile)
   return goodfile;
 }
 
-void Fun4All_Intt_Combiner(int nEvents = 50000,
-                           const int runnumber = 39524,
+void Fun4All_Intt_Combiner(int nEvents = 0,	//* 0 means process all the events
+                           const int runnumber = 39525,
                            const string cdbglobaltag = "ProdA_2024",
                            const bool runTrkrHits = false,
                            const bool applyHotChannel = false,

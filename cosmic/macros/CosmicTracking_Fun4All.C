@@ -1,12 +1,10 @@
 #include "CosmicTracking_Fun4All.hh"
 
-const string &inputFile = "/sphenix/u/wctang/workspace/my_INTT/cosmic/DST_files/data/dst_files/2024/DST_cosmics_intt_00039524_10000events_no_hot_clusterized.root";
-int CosmicTracking_Fun4All(
-    int run_num = 39524,
-    int nEvents = 10000, 
-    const int skip = 0)
-{
-
+const string &inputFile =
+    "/sphenix/u/wctang/workspace/my_INTT/cosmic/DST_files/data/dst_files/2024/"
+    "DST_cosmics_intt_00039468_50000events_no_hot_clusterized.root";
+int CosmicTracking_Fun4All(int run_num = 39468, int nEvents = 10000,
+			   const int skip = 0) {
     Fun4AllServer *se = Fun4AllServer::instance();
     // se->Verbosity(0);
 
@@ -22,14 +20,18 @@ int CosmicTracking_Fun4All(
     // or set it to a fixed value so you can debug your code
     //  rc->set_IntFlag("RANDOMSEED", 12345);
 
-    string run_num_str = GetRunNum8digits(run_num); // string( 8 - to_string(run_num).size(), '0' ) + to_string( run_num );
+    string run_num_str =
+	GetRunNum8digits(run_num);  // string( 8 - to_string(run_num).size(),
+				    // '0' ) + to_string( run_num );
 
-    // DSTs are stored in "/sphenix/tg/tg01/commissioning/INTT/data/dst_files/{year}"
-    // A DST to be fed to this macro is supposed to
+    // DSTs are stored in
+    // "/sphenix/tg/tg01/commissioning/INTT/data/dst_files/{year}" A DST to be
+    // fed to this macro is supposed to
     // - have Trkr_Cluster
     // - have no hot channel
-    // File name format: DST_cosmics_intt_{8-digit run number}_no_hot_clusterinzed.root
-    // for exmaple: DST_cosmics_intt_00038540_no_hot_clusterinzed.root
+    // File name format: DST_cosmics_intt_{8-digit run
+    // number}_no_hot_clusterinzed.root for exmaple:
+    // DST_cosmics_intt_00038540_no_hot_clusterinzed.root
     /*
     string inputFile = kIntt_dst_dir
       + "DST_cosmics_intt_" + run_num_str
@@ -43,9 +45,10 @@ int CosmicTracking_Fun4All(
     // This is needed to read a DST file(s).
     Fun4AllInputManager *in = new Fun4AllDstInputManager("DSTin");
     in->fileopen(inputFile);
-    // in->AddListFile(inputfile); // to read a list of files, use it. A path to the text file needs to be given.
+    // in->AddListFile(inputfile); // to read a list of files, use it. A path to
+    // the text file needs to be given.
     se->registerInputManager(in);
-    se->Print("NODETREE"); // useless
+    se->Print("NODETREE");  // useless
 
     //  InputInit();
 
@@ -65,7 +68,7 @@ int CosmicTracking_Fun4All(
     // return 0;
 
     ///////////////////////////////////////////////////////////////////////////////////
-    // Something depends on Acts should be below....                                 //
+    // Something depends on Acts should be below.... //
     ///////////////////////////////////////////////////////////////////////////////////
     Enable::CDB = true;
     // global tag
@@ -80,16 +83,21 @@ int CosmicTracking_Fun4All(
     Enable::MICROMEGAS = true;
 
     Enable::INTT = true;
-    //  Enable::INTT_ABSORBER			= true; // enables layerwise support structure readout
-    //  Enable::INTT_SUPPORT			= true; // enable global support structure readout
-    //  Enable::INTT_CELL				= Enable::INTT && true;
+    //  Enable::INTT_ABSORBER			= true; // enables layerwise
+    //  support structure readout Enable::INTT_SUPPORT			= true;
+    //  // enable global support structure readout Enable::INTT_CELL
+    //  = Enable::INTT && true;
     Enable::INTT_CLUSTER = Enable::INTT_CELL && true;
-    // Enable::INTT_QA				= Enable::INTT_CLUSTER && Enable::QA && true;
+    // Enable::INTT_QA				= Enable::INTT_CLUSTER && Enable::QA
+    // && true;
 
-    Enable::TRACKING_TRACK = (Enable::MICROMEGAS_CLUSTER && Enable::TPC_CLUSTER && Enable::INTT_CLUSTER && Enable::MVTX_CLUSTER) && false;
+    Enable::TRACKING_TRACK =
+	(Enable::MICROMEGAS_CLUSTER && Enable::TPC_CLUSTER &&
+	 Enable::INTT_CLUSTER && Enable::MVTX_CLUSTER) &&
+	false;
 
     Enable::BLACKHOLE = true;
-    G4MAGNET::magfield_rescale = 0.0; // for zero field
+    G4MAGNET::magfield_rescale = 0.0;  // for zero field
 
     // Initialize the selected subsystems
     G4Init();
@@ -98,20 +106,22 @@ int CosmicTracking_Fun4All(
     // GEANT4 Detector description
     if (!Input::READHITS) G4Setup();
 
-    // Detector Division 
+    // Detector Division
     if (Enable::INTT_CELL) Intt_Cells();
 
     // SVTX tracking
-    TrackingInit(); // necessary for ActsGeometry
+    TrackingInit();  // necessary for ActsGeometry
     if (Enable::INTT_CLUSTER) Intt_Clustering();
 
     /////////////////////
     // const string &outputFile = "cluster_result_00038554_4point_only.root",
     // const string kIntt_qa_cosmics_dir = kIntt_qa_dir + "cosmics/";
-    // string outputFile = kIntt_qa_cosmics_dir + "root/" + "cosmics_intt_" + run_num_str + ".root";
+    // string outputFile = kIntt_qa_cosmics_dir + "root/" + "cosmics_intt_" +
+    // run_num_str + ".root";
 
     string output_name = "cosmics_intt_" + run_num_str + ".root";
-    CosmicTracking *intt_cosmic = new CosmicTracking("CosmicTracking", output_name);
+    CosmicTracking *intt_cosmic =
+	new CosmicTracking("CosmicTracking", output_name);
 
     //  intt_cosmic->SetData( inputFile );
     intt_cosmic->SetOutputPath(kIntt_qa_cosmics_dir);
@@ -126,7 +136,9 @@ int CosmicTracking_Fun4All(
     se->End();
 
     cout << "  Input:  " << inputFile << endl;
-    cout << "  Output: " << intt_cosmic->GetOutputRoot() << endl; // find the path at AnalysisInttCosmicCommissioning.cc line 389
+    cout << "  Output: " << intt_cosmic->GetOutputRoot()
+	 << endl;  // find the path at AnalysisInttCosmicCommissioning.cc line
+		   // 389
     cout << "  Output PDF: " << intt_cosmic->GetOutputPdf() << endl;
     delete se;
 

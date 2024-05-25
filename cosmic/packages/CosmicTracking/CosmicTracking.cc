@@ -204,7 +204,7 @@ int CosmicTracking::EndRun(const int runnumber) {
     g_hitmap_->Scale(1./selected_event_number);
 	g_hitmap_->SetTitle("Cosmic hit map");
 	g_hitmap_->Draw("colz0");
-    DrawIntt(12,12);
+    // DrawIntt(12,12);
 	c_hitmap_->Print((output_hitmap_pdf_file_).c_str());
 
 	return Fun4AllReturnCodes::EVENT_OK;
