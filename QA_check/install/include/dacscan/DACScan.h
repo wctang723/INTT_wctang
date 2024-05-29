@@ -68,6 +68,7 @@ private:
     std::string run_number;
     std::string outputpdf;
     std::string outputroot;
+    std::string outputdir;
     TFile *output_;
     TH1D* h1_dac_dist_;                 //* for DAC scan QA
     TH1D* h1_dac_dist_felix_[8];        //* for DAC scan QA

@@ -9,9 +9,10 @@ using namespace std;
 DACScan::DACScan(const std::string &name, const std::string &outputfilename) : SubsysReco(name) 
 {
     std::cout << "DACScan::~DACScan() Calling ctor" << std::endl;
+    outputdir = "/direct/sphenix+tg+tg01/commissioning/INTT/work/weiche/my_INTT/QA_check/root_files/";
     outputpdf = outputfilename.substr(0, outputfilename.size() - 5) + ".pdf";
     run_number = outputfilename.substr(17, 5); 
-	outputroot = "run" + outputfilename.substr(17, 5) + "_dac0_scan.root";
+	outputroot =  outputdir + "run" + outputfilename.substr(17, 5) + "_dac0_scan.root";
 
 }
 

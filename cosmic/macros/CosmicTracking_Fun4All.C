@@ -88,7 +88,8 @@ int CosmicTracking_Fun4All(int run_num = 39468, int nEvents = 10000,
     //  // enable global support structure readout Enable::INTT_CELL
     //  = Enable::INTT && true;
     Enable::INTT_CLUSTER = Enable::INTT_CELL && true;
-    // Enable::INTT_QA				= Enable::INTT_CLUSTER && Enable::QA
+    // Enable::INTT_QA				= Enable::INTT_CLUSTER &&
+    // Enable::QA
     // && true;
 
     Enable::TRACKING_TRACK =

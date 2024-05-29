@@ -4,6 +4,7 @@ using namespace std;
 
 AnalysisInttCosmicCommissioning::AnalysisInttCosmicCommissioning(const std::string &name, const std::string &output_name) : SubsysReco(name)
 {
+	std::cout << "CosmicTracking() Calling constructor" << std::endl;
     output_name_ = output_name;
     c_ = new TCanvas("name", "title", 800, 800);
 
@@ -33,13 +34,16 @@ AnalysisInttCosmicCommissioning::AnalysisInttCosmicCommissioning(const std::stri
     }
 }
 
-AnalysisInttCosmicCommissioning::~AnalysisInttCosmicCommissioning(){}
+AnalysisInttCosmicCommissioning::~AnalysisInttCosmicCommissioning(){
+	std::cout << "~CosmicTracking() Calling dtor" << std::endl;
+}
 
 /////////////
 // private //
 /////////////
 void AnalysisInttCosmicCommissioning::DrawIntt(double xmax, double ymax) {
 
+    cout << "This is the DrawINTT" << endl;
     if (xmax - ymax < 1e-4) // cross-section view
     {
         for (int i = 0; i < 4; i++)
@@ -67,6 +71,7 @@ void AnalysisInttCosmicCommissioning::DrawIntt(double xmax, double ymax) {
 int AnalysisInttCosmicCommissioning::Fit()
 {
 
+    cout << "This is the fitting function" << endl;
     bool is_fitting_good = false;
     c_->Clear();
     c_->Divide(2, 2);
@@ -78,18 +83,20 @@ int AnalysisInttCosmicCommissioning::Fit()
 
         if (IsFittable(graphs_[i]) == true)
         {
-            graphs_[i]->Fit(lines_[i], "RQN");
+            // graphs_[i]->Fit(lines_[i], "RN");
 
-            constants_[i] = lines_[i]->GetParameter(0);
-            slopes_[i] = lines_[i]->GetParameter(1);
-            chi2ndfs_[i] = lines_[i]->GetChisquare() / lines_[i]->GetNDF();
+            // constants_[i] = lines_[i]->GetParameter(0);
+            // slopes_[i] = lines_[i]->GetParameter(1);
+            // chi2ndfs_[i] = lines_[i]->GetChisquare() / lines_[i]->GetNDF();
 
             ///////////////////// Calculate the average distance ///////////////////
             double sumDistance = 0.0;
-            for (int i = 0; i < graphs_[i]->GetN(); ++i)
+            for (int j = 0; j < graphs_[i]->GetN(); ++j)
             {
                 double x, y;
-                graphs_[i]->GetPoint(i, x, y);
+                graphs_[i]->GetPoint(j, x, y);
+                cout << "This is the constants values: " << constants_[i] << endl;
+                cout << "This is the slopes values: " << slopes_[i] << endl;
                 double distance = TMath::Abs((slopes_[i] * x - y + constants_[i])) / TMath::Sqrt(1 + slopes_[i] * slopes_[i]);
                 sumDistance += distance;
             }
@@ -150,6 +157,7 @@ int AnalysisInttCosmicCommissioning::Fit()
 vector<TrkrCluster *>
 AnalysisInttCosmicCommissioning::GetClusters()
 {
+    cout << "This is the getcluster func." << endl;
     vector<TrkrCluster *> values;
 
     for (unsigned int inttlayer = 0; inttlayer < 4; inttlayer++)
@@ -184,6 +192,7 @@ AnalysisInttCosmicCommissioning::GetClusters()
 
 double AnalysisInttCosmicCommissioning::GetDistance(const Acts::Vector3 a, const Acts::Vector3 b, bool use_x, bool use_y, bool use_z)
 {
+    cout << "This is the getdistance func" << endl;
     double num = 0.0;
     if (use_x)
         num += a.x() * b.x();
@@ -396,6 +405,7 @@ void AnalysisInttCosmicCommissioning::InitPaths()
       + output_basename.substr( 0, output_basename.size()-5 ) + ".pdf";
 
     */
+   cout << "InitPath func" << endl;
 
     string output_root_path = output_path_ + "root/";
     output_root_file_ = output_root_path + output_name_;
@@ -427,6 +437,7 @@ bool AnalysisInttCosmicCommissioning::IsFittable(TGraphErrors *g)
     */
     
 
+   cout << "Isfittable func" << endl;
     // get all x values
     vector<double> values;
     for (int i = 0; i < g->GetN(); i++)
@@ -450,6 +461,7 @@ bool AnalysisInttCosmicCommissioning::IsFittable(TGraphErrors *g)
 
 int AnalysisInttCosmicCommissioning::MakeGraphs(vector<TrkrCluster *> &clusters) {
 
+    cout << "Make graph func" << endl;
     for (unsigned int i = 0; i < vcoordinates_.size(); i++) {
         graphs_[i] = new TGraphErrors();
         graphs_[i]->SetMarkerStyle(20);
@@ -536,6 +548,7 @@ int AnalysisInttCosmicCommissioning::ProcessEventRawHit()
 
 int AnalysisInttCosmicCommissioning::Init(PHCompositeNode *topNode)
 {
+    cout << "Init func" << endl;
     InitPaths();
     std::string outFilename = output_root_file_; // output_name_;
 
@@ -589,7 +602,7 @@ int AnalysisInttCosmicCommissioning::Init(PHCompositeNode *topNode)
 
 int AnalysisInttCosmicCommissioning::InitRun(PHCompositeNode *topNode)
 {
-
+    cout << "InitRun func" << endl;
     c_->Print((output_pdf_file_ + "[").c_str());
     this->ResetEvent(topNode);
 
@@ -598,6 +611,7 @@ int AnalysisInttCosmicCommissioning::InitRun(PHCompositeNode *topNode)
 
 int AnalysisInttCosmicCommissioning::process_event(PHCompositeNode *topNode)
 {
+    cout << "process event func" << endl;
     auto status = this->GetNodes(topNode);
     if (status == Fun4AllReturnCodes::ABORTEVENT)
         return Fun4AllReturnCodes::ABORTEVENT;
@@ -662,6 +676,7 @@ int AnalysisInttCosmicCommissioning::process_event(PHCompositeNode *topNode)
 
 int AnalysisInttCosmicCommissioning::ResetEvent(PHCompositeNode *topNode)
 {
+    cout << "reset event func" << endl;
 
     for (unsigned int i = 0; i < vcoordinates_.size(); i++)
     {
@@ -688,6 +703,7 @@ int AnalysisInttCosmicCommissioning::ResetEvent(PHCompositeNode *topNode)
 
 int AnalysisInttCosmicCommissioning::EndRun(const int runnumber) {
 
+    cout << "reset func" << endl;
     //c_hitmap_->cd();
     //g_hitmap_->SetTitle("Cosmic 2D hit map");
     //g_hitmap_->Draw("colz0");

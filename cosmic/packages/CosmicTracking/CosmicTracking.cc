@@ -8,6 +8,7 @@ using namespace std;
 CosmicTracking::CosmicTracking(const string &name, const string &output_name)
     : SubsysReco(name) {
 
+    cout << "CosmicTracking() Calling ctor" << endl;
     output_name_ = output_name;
     c_ = new TCanvas("name", "title", 800, 800);
     c_->Divide(2, 2);
@@ -625,10 +626,10 @@ int CosmicTracking::Fit() {
 			///////////////////// Calculate the average distance ///////////////////
             cout << "Here starts the calculation of average distance!" << endl;
 			double sumDistance = 0.0;
-			for (int i = 0; i < graphs_[i]->GetN(); ++i) {
+			for (int j = 0; j < graphs_[i]->GetN(); ++j) {
 				double x, y;
 				graphs_[i]->GetPoint(i, x, y);
-				double distance = 1; //TMath::Abs((slopes_[i] * x - y + constants_[i])) / TMath::Sqrt(1 + slopes_[i] * slopes_[i]);
+				double distance = TMath::Abs((slopes_[i] * x - y + constants_[i])) / TMath::Sqrt(1 + slopes_[i] * slopes_[i]);
 				sumDistance += distance;
 			}
 			average_distances_[i] = sumDistance / graphs_[i]->GetN();
