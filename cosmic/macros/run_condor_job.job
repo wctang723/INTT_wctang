@@ -1,0 +1,17 @@
+Universe           = vanilla
+Initialdir         = /sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/macros
+Executable         = run_job.sh
+PeriodicHold       = (NumJobStarts>=1 && JobStatus == 1)
+concurrency_limits = CONCURRENCY_LIMIT_DEFAULT:100
+request_memory     = 4GB
+Priority           = 20
+job_lease_duration = 86400
+runnumber          = 39468
+Nevent             = -1
+skip               = 0
+input_filename     = /sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/DST_files/data/dst_files/2024/
+Output             = /sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/macros/condor_log/condor_$(process).out
+Error              = /sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/macros/condor_log/condor_$(process).err
+Log                = /sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/macros/condor_log/condor_$(process).log
+Arguments          = "$(input_filename) $(runnumber) $(Nevent) $(skip)"
+Queue 1 

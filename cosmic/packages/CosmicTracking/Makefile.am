@@ -23,7 +23,8 @@ libCosmicTracking_la_LIBADD = \
   -lphool \
   -lSubsysReco \
   -lffarawmodules \
-  -ltrack_io
+  -ltrack_io \
+  -lMathFunction
 
 BUILT_SOURCES = testexternals.cc
 

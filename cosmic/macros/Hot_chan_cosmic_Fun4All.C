@@ -25,8 +25,8 @@ R__LOAD_LIBRARY(libcdbobjects.so)
 R__LOAD_LIBRARY(libhot_channel_finder_wctang.so)
 
 int Hot_chan_cosmic_Fun4All (
-	int nEvents = 10,
-	const string &inputFile = "/direct/sphenix+tg+tg01/commissioning/INTT/data/dst_files/2023/test/test_DST_cosmics_intt_00025814.root",
+	int nEvents = 1000,
+	const string &inputFile = "/direct/sphenix+tg+tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/InttProduction/ProdDST/intt-00039468.root",
 	//"/sphenix/tg/tg01/commissioning/INTT/work/hachiya/InttReco/DST_InttCluster_run20869.root",
 	//"https://www.phenix.bnl.gov/WWW/publish/phnxbld/sPHENIX/files/sPHENIX_G4Hits_sHijing_9-11fm_00000_00010.root",
 	const int skip = 0 

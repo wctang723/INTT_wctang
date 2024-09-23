@@ -1,17 +1,16 @@
 #include "Fun4All_Clustering.hh"
 
-int Fun4All_Clustering(int run_num = 39525,
-		       int nEvents = 10000,  // 5,
-		       const int skip = 0) {
-    string run_num_str =
-	string(8 - to_string(run_num).size(), '0') + to_string(run_num);
+int Fun4All_Clustering (int       run_num = 39524,
+                        int       nEvents = 50000,   // 5,
+                        const int skip    = 0) {
+    string run_num_str = string (8 - to_string (run_num).size(), '0') + to_string (run_num);
 
     std::string inputFile = kIntt_dst_dir + "DST_cosmics_intt_" + run_num_str;
 
     if (nEvents != 0) inputFile += "_" + std::to_string(nEvents) + "events";
 
-    // inputFile += "_no_hot.root";
-    inputFile += ".root";
+    inputFile += "_no_hot.root";
+    // inputFile += ".root";
 
     std::string outputFile = kIntt_dst_dir + "DST_cosmics_intt_" + run_num_str;
     if (nEvents != 0) outputFile += "_" + std::to_string(nEvents) + "events";
@@ -77,8 +76,7 @@ int Fun4All_Clustering(int run_num = 39525,
     Intt_Clustering();
 
     std::string o_file = outputFile;
-    Fun4AllOutputManager *out =
-	new Fun4AllDstOutputManager("DST", o_file.c_str());
+    Fun4AllOutputManager *out = new Fun4AllDstOutputManager("DST", o_file.c_str());
     se->registerOutputManager(out);
     /////////////////////
 
