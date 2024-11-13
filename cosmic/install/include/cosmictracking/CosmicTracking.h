@@ -1,23 +1,29 @@
 #ifndef COSMICTRACKING_H
 #define COSMICTRACKING_H
 
+#include <TBox.h>
+#include <TCanvas.h>
+#include <TEllipse.h>
+#include <TF1.h>
+#include <TFile.h>
+#include <TGraph.h>
+#include <TGraphErrors.h>
+#include <TH1F.h>
+#include <TH2D.h>
+#include <TLatex.h>
+#include <TLine.h>
+#include <TMultiGraph.h>
+#include <TString.h>
+#include <TStyle.h>
+#include <TTree.h>
+//#include "Math/Vector3D.h"
+
 #include <algorithm>
 #include <iomanip>
 #include <string>
 #include <tuple>
 
-#include "TBox.h"
-#include "TCanvas.h"
-#include "TEllipse.h"
-#include "TF1.h"
-#include "TFile.h"
-#include "TGraph.h"
-#include "TGraphErrors.h"
-#include "TH1F.h"
-#include "TH2D.h"
-#include "TTree.h"
-//#include "Math/Vector3D.h"
-
+//* fun4all
 #include <ffaobjects/FlagSavev1.h>
 #include <ffarawobjects/InttRawHit.h>
 #include <ffarawobjects/InttRawHitContainer.h>
@@ -87,7 +93,6 @@ class CosmicTracking : public SubsysReco {
     void SetMagnet (bool flag) { is_magnet_ = flag; };
     // void SetQaDir( string dir ){ output_qa_path_ = dir;};
     void SetYear (int year) { year_ = year; };
-    // void SetData( string path = "" );
     void SetOutputPath (string path);
 
    private:
@@ -102,12 +107,20 @@ class CosmicTracking : public SubsysReco {
     string output_hitmap_pdf_file_ = "";
     string output_txt_file_        = "";
     int    misc_counter_           = 0;
+    int    fit_counter_            = 0;
+    int    clu_ith                 = 0;
     int    selected_event_number;
     bool   is_magnet_ = false;
     int    number_cluster_equal_5;
     int    number_cluster_equal_6;
     int    number_cluster_equal_7;
     int    number_cluster_equal_8;
+    bool   is_cluster_cut = true;
+    int    empty_event    = 0;
+
+    //* some constant variables
+    unsigned int adc0            = 15;
+    int          event_selection = 0;
 
     //* For looping over clusters
     vector<vector<TrkrCluster *>> combinations;
@@ -117,14 +130,17 @@ class CosmicTracking : public SubsysReco {
     //* objects
     TCanvas *c_;
     TCanvas *c_hitmap_;
+    TCanvas *c1;
     TFile   *outFile_;
     TTree   *outTree_;
 
-    //* Branches for TTree
-
     //* event information
     int      n_cluster_;
+    int      total_cluster_;
     uint64_t bco_;
+    int      combinations_ith = 0;
+    int      combinations_jth = 0;
+    int      combinations_kth = 0;
 
     //* hit (cluster) information
     std::vector<double>                posX_;
@@ -140,19 +156,50 @@ class CosmicTracking : public SubsysReco {
     vector<pair<int, int>> vcoordinates_;
 
     //* TGraphs
-    TGraphErrors *graphs_[4];   // 0: xy, 1: zy, 2: zx 3: zr
+    TGraphErrors *graphs_[4];             //* 0: xy, 1: zy, 2: zx 3: zr
+    TGraphErrors *graphs_rotate[4];       //* 0: xy, 1: zy, 2: zx 3: zr
+    TGraphErrors *graphs_background[4];   //* 0: xy, 1: zy, 2: zx 3: zr
+    TMultiGraph  *mg[4];
+    // TGraphErrors *graph_zr_rotate;    //* The display graph for z-r (since the original plot will be rotate by 90 degree to make the fitting easy)
     TH2D         *g_hitmap_;
+    TLine        *l;
+    TLatex       *lat;
+
+    //* plots for the cosmics QA
+    // TH1D *h1_angle_xy      = new TH1D ("h1_angle_xy", "angle dist.", 180, 0, 180);
+    TH1D *h1_resi_xy_4clus = new TH1D ("h1_resi_xy_4clus", "residual dist.", 50, 0, 0.1);
+    TH1D *h1_resi_xy_5clus = new TH1D ("h1_resi_xy_5clus", "residual dist.", 50, 0, 0.1);
+    TH1D *h1_resi_xy_6clus = new TH1D ("h1_resi_xy_6clus", "residual dist.", 50, 0, 0.1);
+    TH1D *h1_resi_xy_7clus = new TH1D ("h1_resi_xy_7clus", "residual dist.", 50, 0, 0.1);
+    TH1D *h1_resi_zr_4clus = new TH1D ("h1_resi_zr_4clus", "residual dist.", 500, 0, 1);
+    TH1D *h1_resi_zr_5clus = new TH1D ("h1_resi_zr_5clus", "residual dist.", 500, 0, 1);
+    TH1D *h1_resi_zr_6clus = new TH1D ("h1_resi_zr_6clus", "residual dist.", 500, 0, 1);
+    TH1D *h1_resi_zr_7clus = new TH1D ("h1_resi_zr_7clus", "residual dist.", 500, 0, 1);
+
+    //* Some plots for raw data check
+    TH2D *h2_cluster_size_adc_before  = new TH2D ("h2_cluster_size_adc_before", "cluster_size vs cluster_adc (w/o cut)", 40, 0, 600, 20, 0, 20);   //* x axis: adc, y axis: size
+    TH2D *h2_cluster_size_adc_after   = new TH2D ("h2_cluster_size_adc_after", "cluster_size vs cluster_adc (w/ cut)", 40, 0, 600, 20, 0, 20);     //* x axis: adc, y axis: size
+    TH1D *h1_total_cluster_before_cut = new TH1D ("h1_total_cluster_before_cut", "total clusters dist. (w/o cut)", 20, 0, 20);
+    TH1D *h1_total_cluster_after_cut  = new TH1D ("h1_total_cluster_after_cut", "total_cluster dist. (w/ cut)", 20, 0, 20);
+    TH1D *h1_cluster_size_before_cut  = new TH1D ("h1_cluster_size_before_cut", "cluster size dist. (w/o cut)", 20, 0, 20);
+    TH1D *h1_cluster_size_after_cut   = new TH1D ("h1_cluster_size_after_cut", "cluster size dist. (w/ cut)", 20, 0, 20);
+    TH1D *h1_phi_size_before_cut      = new TH1D ("h1_cluster_phi_size_before_cut", "phi size dist. (w/o cut)", 20, 0, 20);
+    TH1D *h1_phi_size_after_cut       = new TH1D ("h1_cluster_phi_size_after_cut", "phi size dist. (w/ cut)", 20, 0, 20);
+    TH1D *h1_cluster_adc_before_cut   = new TH1D ("h1_cluster_adc_before_cut", "cluster Adc dist. (w/o cut)", 40, 0, 600);
+    TH1D *h1_cluster_adc_after_cut    = new TH1D ("h1_cluster_adc_after_cut", "cluster Adc dist. (w/ cut)", 40, 0, 600);
 
     //* TF1
     TF1 *lines_[4];
+    TF1 *lines_rotate[4];   //* The drawing line for z-r graph display
 
-    /// TF1 Parameters
+    //* TF1 Parameters
     double slopes_[4];
     double constants_[4];
     double chi2ndfs_[4];
     double average_distances_[4];
     double residual[4];
 
+    //* Branches for TTree
     double slope_xy_;
     double constant_xy_;
     double chi2_xy_;
@@ -192,7 +239,7 @@ class CosmicTracking : public SubsysReco {
 
     // private functions
     void                  DrawIntt (double xmax, double ymax);
-    int                   Fit();
+    void                  Fit();
     vector<TrkrCluster *> GetClusters();
     double                GetDistance (const Acts::Vector3 a, const Acts::Vector3 b, bool use_x = true, bool user_y = true, bool use_z = true);   // general function
     double                GetDistanceXY (const Acts::Vector3 a, const Acts::Vector3 b) { return GetDistance (a, b, true, true, false); };         // distance in X-Y place
@@ -202,13 +249,11 @@ class CosmicTracking : public SubsysReco {
     bool   IsFittable (TGraphErrors *g);
     void   InitPaths();
     string Int2Coordinate (int num);
-    int    MakeGraphs (vector<TrkrCluster *> &clusters);
-    int    MakeMultiGraphs (vector<TrkrCluster *> &clusters);
-    int    HitMapCheck (vector<TrkrCluster *> &clusters);
+    void   MakeGraphs (vector<TrkrCluster *> &clusters);
+    void   HitMapCheck (vector<TrkrCluster *> &clusters);
     int    ProcessEventRawHit();
-
-    // void                          generateSubsets (vector<TrkrCluster *> &nums, int m, int start, vector<TrkrCluster *> &currentSubset, vector<vector<TrkrCluster *>> &allSubsets);
-    // vector<vector<TrkrCluster *>> generateAllSubsets (vector<TrkrCluster *> &nums, int m);
+    void   SetRawDataCheck (int is_check = 0, bool is_cluster_check = true);
+    int    ClusterCut (vector<TrkrCluster *> &clusters, int i = 0);
 };
 
 #endif   // COSMICTRACKING_H

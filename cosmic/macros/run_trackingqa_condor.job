@@ -1,0 +1,19 @@
+Universe           = vanilla
+Initialdir         = /sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/macros
+Executable         = run_trackingqa.sh
+PeriodicHold       = (NumJobStarts >= 1 && JobStatus == 1)
+concurrency_limits = CONCURRENCY_LIMIT_DEFAULT:1000
+request_memory     = 4000MB
+Priority           = 20
+job_lease_duration = 86400
+
+path               = cosmics_intt_00039370_10000events_
+runnum             = 39369
+switchcase         = 1
+is_debug           = 0
+Output             = /sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/macros/condor_log/condor_QA$(process).out
+Error              = /sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/macros/condor_log/condor_QA$(process).err
+Log                = /tmp/condor_wctangQA$(process).log
+
+Arguments          = $(path) $(runnum) $(is_debug) $(switchcase) $(process)
+Queue 12

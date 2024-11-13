@@ -4,7 +4,9 @@
 #include <TFile.h>
 #include <TGraph.h>
 #include <TH1D.h>
+#include <TH2D.h>
 #include <TMath.h>
+#include <TPaveStats.h>
 #include <TTree.h>
 
 #include <iostream>
@@ -12,210 +14,171 @@
 
 using namespace std;
 
-void CosmicTrackQA () {
+//* set global to that filling function can use it
+TH1D *h1[6];
+TH1D *h1_resi[6];
+TH1D *h1_angle[11];
+TH2D *h2[2];
+TH2D *h2_zr_2D;
+TH2D *h2_angle[4];
+
+TH1D *hsum1[6];
+TH1D *hsum1_resi[8];
+TH1D *hsum1_angle[9];
+TH2D *hsum2[2];
+TH2D *hsum2_zr_2D;
+TH2D *hsum2_angle[4];
+
+void filling (string path = "/sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/DST_files/QA/cosmics/2024/root/cosmics_intt_00025145.root") {
+    TFile *f;
+    f = new TFile (path.c_str(), "READ");
+    cout << path << endl;
+    if ( !f ) cout << "something wrong with file" << endl;
+
+    //* Adding all the histogram
+    // h1[0] = (TH1D *)f->Get ("h1_total_cluster_before_cut");
+    // h1[1] = (TH1D *)f->Get ("h1_total_cluster_after_cut");
+    // h1[2] = (TH1D *)f->Get ("h1_cluster_size_before_cut");
+    // h1[3] = (TH1D *)f->Get ("h1_cluster_size_after_cut");
+    // h1[4] = (TH1D *)f->Get ("h1_cluster_adc_before_cut");
+    // h1[5] = (TH1D *)f->Get ("h1_cluster_adc_after_cut");
+    // h2[0] = (TH2D *)f->Get ("h2_cluster_size_adc_before");
+    // h2[1] = (TH2D *)f->Get ("h2_cluster_size_adc_after");
+
+    //* for residual
+    // h1_resi[0] = (TH1D *)f->Get ("h1_resi_xy_4clus");
+    // h1_resi[1] = (TH1D *)f->Get ("h1_resi_zr_4clus");
+    // h1_resi[2] = (TH1D *)f->Get ("h1_resi_xy_5clus");
+    // h1_resi[3] = (TH1D *)f->Get ("h1_resi_zr_5clus");
+    // h1_resi[4] = (TH1D *)f->Get ("h1_resi_xy_6clus");
+    // h1_resi[5] = (TH1D *)f->Get ("h1_resi_zr_6clus");
+    // h1_resi[6] = (TH1D *)f->Get ("h1_resi_xy_7clus");
+    // h1_resi[7] = (TH1D *)f->Get ("h1_resi_zr_7clus");
+
+    //* for angle
+    h1_angle[0]  = (TH1D *)f->Get ("h1_angle_xy");
+    h1_angle[1]  = (TH1D *)f->Get ("h1_angle_zr");
+    h1_angle[2]  = (TH1D *)f->Get ("h1_angle_cluster_xy");
+    h1_angle[3]  = (TH1D *)f->Get ("h1_angle_cluster_zr");
+    h1_angle[4]  = (TH1D *)f->Get ("h1_constant_xy");
+    h1_angle[5]  = (TH1D *)f->Get ("h1_constant_zr");
+    h1_angle[6]  = (TH1D *)f->Get ("posz");
+    h1_angle[7]  = (TH1D *)f->Get ("distance_from_origin");
+    h1_angle[8]  = (TH1D *)f->Get ("h1_angle_xy_distance_cut_0.5");
+    h1_angle[9]  = (TH1D *)f->Get ("h1_angle_xy_distance_cut_1");
+    h1_angle[10] = (TH1D *)f->Get ("h1_angle_xy_distance_cut_2");
+    h2_angle[0]  = (TH2D *)f->Get ("hitmap_cluster_xy");
+    h2_angle[1]  = (TH2D *)f->Get ("hitmap_cluster_zr");
+    h2_angle[2]  = (TH2D *)f->Get ("projection_hitmap");
+    h2_angle[3]  = (TH2D *)f->Get ("angle_distance");
+
+    //* for zr_2D
+    // h2_zr_2D = (TH2D *)f->Get ("h2_zr_resi_check");
+
+    //* sum up
+    // hsum2_zr_2D->Add (h2_zr_2D);
+    // for ( int i = 0; i < 6; i++ ) hsum1_resi[i]->Add (h1_resi[i]);
+    // for ( int i = 0; i < 6; i++ ) hsum1[i]->Add (h1[i]);
+    // for ( int i = 0; i < 2; i++ ) hsum2[i]->Add (h2[i]);
+    for ( int i = 0; i < 11; i++ ) hsum1_angle[i]->Add (h1_angle[i]);
+    for ( int i = 0; i < 4; i++ ) hsum2_angle[i]->Add (h2_angle[i]);
+
+    //* Closing the file somehow cause the problem, don't use Close()
+    // f->Close();
+    // delete f;
+}
+
+void CosmicTrackQA (string file = "cosmics_intt_00039524_0.root", bool is_debug = 0) {
     gErrorIgnoreLevel = kSysError;
 
-    TFile *f;
-    f = TFile::Open ("/sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/DST_files/QA/cosmics/2024/root/cosmics_intt_00039525.root", "READ");
+    hsum2_zr_2D = new TH2D ("h2_zr_resi_check", "ratio vs zr residual", 100, 0, 1, 5, 0, 125);
+    // for ( int i = 0; i < 6; i++ ) hsum1[i] = new TH1D();
+    // for ( int i = 0; i < 2; i++ ) hsum2[i] = new TH2D();
+    // for ( int i = 0; i < 8; i++ ) hsum1_resi[i] = new TH1D ("h1_resi_xy_4clus", "residual dist.", 1000, 0, 0.5);
+    for ( int i = 0; i < 11; i++ ) hsum1_angle[i] = new TH1D();
+    hsum1_angle[7] = new TH1D ("angle_7", "test", 100, 0, 15);
+    // for ( int i = 0; i < 4; i++ ) hsum2_angle[i] = new TH2D();
+    hsum2_angle[0] = new TH2D ("test", "test", 240, -12, 12, 240, -12, 12);
+    hsum2_angle[1] = new TH2D ("test", "test", 250, -25, 25, 240, -12, 12);
+    hsum2_angle[2] = new TH2D ("test", "test", 240, -12, 12, 240, -12, 12);
+    hsum2_angle[3] = new TH2D ("test", "test", 90, 0, 180, 50, 0, 15);
 
-    TTree *tree;
+    // for ( int queue = 0; queue < 24; queue++ ) filling (Form ("test/root/39524/plots_angle_zr_residaul_openup_cosmics_intt_00039524_%d.root", queue));
+    // for ( int queue = 0; queue < 24; queue++ ) filling (Form ("test/root/39524/plots_zr_2D_cosmics_intt_00039524_%d.root", queue));
+    // for ( int queue = 0; queue < 29; queue++ ) filling (Form ("test/root/cosmics_intt_00039530_%d.root", queue));
+    // for ( int queue = 0; queue < 24; queue++ ) filling (Form ("test/root/plots_cosmics_intt_00039525_%d.root", queue));
+    filling ("plots_39524_angle_zr_open_cut.root");
+    filling ("plots_39525_angle_zr_open_cut.root");
+    filling ("plots_39527_angle_zr_open_cut.root");
+    filling ("plots_39528_angle_zr_open_cut.root");
+    filling ("plots_39529_angle_zr_open_cut.root");
+    filling ("plots_39530_angle_zr_open_cut.root");
+    // filling (path);
 
-    double slope_xy (0), constant_xy (0), chi2ndf_xy (0), residual_xy (0);
-    double slope_zr (0), constant_zr (0), chi2ndf_zr (0), residual_zr (0);
-    double angle_xy (0), angle_zr (0);
-    double n_cluster (0);
+    // hsum2_zr_2D->SetNameTitle (h2_zr_2D->GetName(), h2_zr_2D->GetTitle());
+    // for ( int i = 0; i < 6; i++ ) hsum1_resi[i]->SetNameTitle (h1_resi[i]->GetName(), h1_resi[i]->GetTitle());
+    // for ( int i = 0; i < 6; i++ ) hsum1[i]->SetNameTitle (h1[i]->GetName(), h1[i]->GetTitle());
+    for ( int i = 0; i < 11; i++ ) hsum1_angle[i]->SetNameTitle (h1_angle[i]->GetName(), h1_angle[i]->GetTitle());
+    for ( int i = 0; i < 4; i++ ) hsum2_angle[i]->SetNameTitle (h2_angle[i]->GetName(), h2_angle[i]->GetTitle());
+    // for ( int i = 0; i < 2; i++ ) hsum2[i]->SetNameTitle (h2[i]->GetName(), h2[i]->GetTitle());
+    // for ( int i = 0; i < 2; i++ ) hsum2[i]->SetNameTitle (h2[i]->GetName(), h2[i]->GetTitle());
 
-    tree = (TTree *)f->Get ("cluster_tree");
-    tree->SetBranchAddress ("slope_xy", &slope_xy);
-    tree->SetBranchAddress ("constant_xy", &constant_xy);
-    tree->SetBranchAddress ("chi2ndf_xy", &chi2ndf_xy);
-    tree->SetBranchAddress ("slope_zr", &slope_zr);
-    tree->SetBranchAddress ("constant_zr", &constant_zr);
-    tree->SetBranchAddress ("chi2ndf_zr", &chi2ndf_zr);
-    tree->SetBranchAddress ("residual_xy", &residual_xy);
-    tree->SetBranchAddress ("residual_zr", &residual_zr);
-    tree->SetBranchAddress ("n_cluster", &n_cluster);
+    //* combine the histogram in root files into one
+    TFile *plots = TFile::Open ("plots_angle_zr_open_cut.root", "RECREATE");
+    for ( int i = 0; i < 11; i++ ) hsum1_angle[i]->Write();
+    for ( int i = 0; i < 4; i++ ) hsum2_angle[i]->Write();
+    // TFile *plots = TFile::Open ("plots_39530_QA.root", "RECREATE");
+    // for ( int i = 0; i < 6; i++ ) hsum1[i]->Write();
+    // for ( int i = 0; i < 2; i++ ) hsum2[i]->Write();
+    // TFile *plots = TFile::Open ("plots_resi.root", "RECREATE");
+    // for ( int i = 0; i < 6; i++ ) hsum1_resi[i]->Write();
+    // TFile *plots = TFile::Open ("plots_39525_zr_2D_check.root", "RECREATE");
+    // hsum2_zr_2D->Write();
 
-    TH1D    *h1_angle_xy       = new TH1D ("h1_angle_xy", "angle dist.", 36, 0, 180);
-    TH1D    *h1_angle_cut_xy   = new TH1D ("h1_angle_cut_xy", "angle dist. w/ cut", 36, 0, 180);
-    TH1D    *h1_angle_zr       = new TH1D ("h1_angle_zr", "angle dist.", 100, 0, 100);
-    TH1D    *h1_slope_cut_zr   = new TH1D ("h1_slope_cut_zr", "angle dist. w/ cut", 100, 0, 100);
-    TH1D    *h1_constant_xy    = new TH1D ("h1_constant_xy", "constant dist.", 400, -200, 200);
-    TH1D    *h1_constant_zr    = new TH1D ("h1_constant_zr", "constant dist.", 400, -200, 200);
-    TH1D    *h1_chi2_xy        = new TH1D ("h1_chi2_xy", "chi2 dist.", 50, 0, 5);
-    TH1D    *h1_resi_xy        = new TH1D ("h1_resi_xy", "residual dist.", 50, 0, 5);
-    TH1D    *h1_chi2_zr        = new TH1D ("h1_chi2_zr", "chi2 dist.", 100, 0, 10);
-    TH1D    *h1_resi_zr        = new TH1D ("h1_resi_zr", "residual dist.", 50, 0, 5);
-    TH2D    *h2_anglge_chi2_xy = new TH2D ("h2_angle_chi2", "Angle vs chi2 corr. XY", 45, 0, 90, 40, 0, 40);
-    TH2D    *h2_anglge_resi_xy = new TH2D ("h2_angle_resi", "Angle vs resi corr. XY", 45, 0, 90, 40, 0, 40);
-    TH1D    *h1_resi_xy_4clus  = new TH1D ("h1_resi_xy_4clus", "residual dist.", 50, 0, 5);
-    TH1D    *h1_resi_xy_5clus  = new TH1D ("h1_resi_xy_5clus", "residual dist.", 50, 0, 5);
-    TCanvas *c0_               = new TCanvas ("c0_", "c0_", 1000, 1000);
+    //* To save some plots to pdf
+    // TCanvas *c0_ = new TCanvas ("c0_", "c0_", 1000, 1000);
 
-    // cout << "check point......" << endl;
+    // c0_->cd();
+    // h1_angle_xy->SetLineColor (kRed);
+    // h1_angle_xy->Draw();
+    // // c0_->Print ("test/Cosmic_tracks_fitting_angle_distribution_xy.pdf");
+    // c0_->Clear();
 
-    int nentries = (int)tree->GetEntries();
-    cout << "Number of entries: " << nentries << endl;
-    for ( int i = 0; i < 1000; i++ ) {
-        tree->GetEntry (i);
-        angle_xy = (TMath::ATan (slope_xy)) * (180. / TMath::Pi());
-        if ( angle_xy < 0 ) angle_xy += 180;
-        h1_angle_xy->Fill (angle_xy);
-        h1_constant_xy->Fill (constant_xy);
-        h1_chi2_xy->Fill (chi2ndf_xy);
-        h1_resi_xy->Fill (residual_xy);
-        angle_zr = TMath::ATan (slope_zr) * (180. / TMath::Pi());
-        h1_angle_zr->Fill (angle_zr);
-        h1_constant_zr->Fill (constant_zr);
-        h1_chi2_zr->Fill (chi2ndf_zr);
-        h1_resi_zr->Fill (residual_zr);
-        h2_anglge_chi2_xy->Fill (angle_xy, chi2ndf_xy);
-        h2_anglge_resi_xy->Fill (angle_xy, residual_xy);
-        if ( residual_xy < 2 ) h1_angle_cut_xy->Fill (angle_xy);
-        if ( residual_zr < 2 ) h1_slope_cut_zr->Fill (angle_zr);
-        h1_resi_xy_4clus->Fill (residual_xy);
-        // cout << "ok" << endl;
-        if ( n_cluster == 5 ) h1_resi_xy_5clus->Fill (residual_xy);
-    }
+    // c0_->cd();
+    // h1_angle_zr->SetLineColor (kRed);
+    // h1_angle_zr->Draw();
+    // // c0_->Print ("test/Cosmic_tracks_fitting_angle_distribution_zr.pdf");
+    // c0_->Clear();
 
-    // TFile *f2;
-    // f2 = TFile::Open ("/sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/DST_files/QA/cosmics/2024/root/tmp/cosmics_intt_00039468.root", "READ");
-    // TTree *tree2;
+    // c0_->cd();
+    // // h1_chi2_xy->SetMaximum (100);
+    // h1_chi2_xy->SetLineColor (kRed);
+    // h1_resi_xy->SetLineColor (kBlue);
+    // h1_chi2_xy->Draw();
+    // h1_resi_xy->Draw ("SAMES");
+    // gPad->Update();   // Without gPad->Update() the line h->FindObject("stats") returns a null pointer.
+    // TPaveStats *st1 = (TPaveStats *)h1_resi_xy->FindObject ("stats");
+    // st1->SetX1NDC (0.6);    // lower left x
+    // st1->SetX2NDC (0.75);   // lower left y
+    // st1->SetY1NDC (0.85);   // lower left x + some width
+    // st1->SetY2NDC (0.95);   // lower left y + some height
+    // // st1->SetLineColor (kRed);
+    // // c0_->Print ("test/Cosmic_tracks_fitting_chi2ndf_vs_residual_distribution_xy.pdf");
+    // c0_->Clear();
 
-    // tree2 = (TTree *)f2->Get ("cluster_tree");
-    // tree2->SetBranchAddress ("slope_xy", &slope_xy);
-    // tree2->SetBranchAddress ("constant_xy", &constant_xy);
-    // tree2->SetBranchAddress ("chi2ndf_xy", &chi2ndf_xy);
-    // tree2->SetBranchAddress ("slope_zr", &slope_zr);
-    // tree2->SetBranchAddress ("constant_zr", &constant_zr);
-    // tree2->SetBranchAddress ("chi2ndf_zr", &chi2ndf_zr);
-    // tree2->SetBranchAddress ("residual_xy", &residual_xy);
-    // tree2->SetBranchAddress ("residual_zr", &residual_zr);
-    // tree2->SetBranchAddress ("n_cluster", &n_cluster);
+    // c0_->cd();
+    // h2_anglge_resi_xy->Draw ("COLZ");
+    // // c0_->Print ("test/Cosmic_tracks_fitting_residual_vs_angle_correlation_xy.pdf");
+    // c0_->Clear();
 
-    // nentries = (int)tree->GetEntries();
-    // cout << "Number of entries: " << nentries << endl;
-    // for ( int i = 0; i < nentries; i++ ) {
-    //     tree->GetEntry (i);
-    //     angle_xy = (TMath::ATan (slope_xy)) * (180. / TMath::Pi());
-    //     if ( angle_xy < 0 ) angle_xy += 180;
-    //     h1_angle_xy->Fill (angle_xy);
-    //     h1_constant_xy->Fill (constant_xy);
-    //     h1_chi2_xy->Fill (chi2ndf_xy);
-    //     h1_resi_xy->Fill (residual_xy);
-    //     angle_zr = TMath::ATan (slope_zr) * (180. / TMath::Pi());
-    //     h1_angle_zr->Fill (angle_zr);
-    //     h1_constant_zr->Fill (constant_zr);
-    //     h1_chi2_zr->Fill (chi2ndf_zr);
-    //     h1_resi_zr->Fill (residual_zr);
-    //     h2_anglge_chi2_xy->Fill (angle_xy, chi2ndf_xy);
-    //     h2_anglge_resi_xy->Fill (angle_xy, residual_xy);
-    //     if ( residual_xy < 2 ) h1_angle_cut_xy->Fill (angle_xy);
-    //     if ( residual_zr < 2 ) h1_slope_cut_zr->Fill (angle_zr);
-    //     if ( n_cluster == 4 ) h1_resi_xy_4clus->Fill (residual_xy);
-    //     if ( n_cluster == 5 ) h1_resi_xy_5clus->Fill (residual_xy);
-    // }
-
-    // f2->Close();
-
-    // TFile *f3;
-    // f3 = TFile::Open ("/sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/DST_files/QA/cosmics/2024/root/cosmics_intt_00039524.root", "READ");
-    // TTree *tree3;
-    // tree3 = (TTree *)f3->Get ("cluster_tree");
-    // tree3->SetBranchAddress ("slope_xy", &slope_xy);
-    // tree3->SetBranchAddress ("constant_xy", &constant_xy);
-    // tree3->SetBranchAddress ("chi2ndf_xy", &chi2ndf_xy);
-    // tree3->SetBranchAddress ("slope_zr", &slope_zr);
-    // tree3->SetBranchAddress ("constant_zr", &constant_zr);
-    // tree3->SetBranchAddress ("chi2ndf_zr", &chi2ndf_zr);
-    // tree3->SetBranchAddress ("residual_xy", &residual_xy);
-    // tree3->SetBranchAddress ("residual_zr", &residual_zr);
-    // tree3->SetBranchAddress ("n_cluster", &n_cluster);
-    // nentries = (int)tree->GetEntries();
-    // cout << "Number of entries: " << nentries << endl;
-    // for ( int i = 0; i < nentries; i++ ) {
-    //     tree->GetEntry (i);
-    //     angle_xy = (TMath::ATan (slope_xy)) * (180. / TMath::Pi());
-    //     if ( angle_xy < 0 ) angle_xy += 180;
-    //     h1_angle_xy->Fill (angle_xy);
-    //     h1_constant_xy->Fill (constant_xy);
-    //     h1_chi2_xy->Fill (chi2ndf_xy);
-    //     h1_resi_xy->Fill (residual_xy);
-    //     angle_zr = TMath::ATan (slope_zr) * (180. / TMath::Pi());
-    //     h1_angle_zr->Fill (angle_zr);
-    //     h1_constant_zr->Fill (constant_zr);
-    //     h1_chi2_zr->Fill (chi2ndf_zr);
-    //     h1_resi_zr->Fill (residual_zr);
-    //     h2_anglge_chi2_xy->Fill (angle_xy, chi2ndf_xy);
-    //     h2_anglge_resi_xy->Fill (angle_xy, residual_xy);
-    //     if ( residual_xy < 2 ) h1_angle_cut_xy->Fill (angle_xy);
-    //     if ( residual_zr < 2 ) h1_slope_cut_zr->Fill (angle_zr);
-    //     if ( n_cluster == 4 ) h1_resi_xy_4clus->Fill (residual_xy);
-    //     if ( n_cluster == 5 ) h1_resi_xy_5clus->Fill (residual_xy);
-    // }
-    // std::cout << "Maximum bin:" << h1_angle_xy->GetMaximumBin() << std::endl;
-
-    c0_->cd();
-    h1_angle_xy->SetLineColor (kRed);
-    // h1_angle_cut_xy->SetLineColor (kBlue);
-    h1_angle_xy->Draw();
-    // h1_angle_cut_xy->Draw ("SAME");
-    c0_->Print ("Cosmic_tracks_fitting_angle_distribution_xy.pdf");
-    c0_->Clear();
-    c0_->cd();
-    h1_constant_xy->Draw();
-    c0_->Print ("Cosmic_tracks_fitting_constant_distribution_xy.pdf");
-    c0_->Clear();
-    c0_->cd();
-    h1_angle_zr->SetLineColor (kRed);
-    // h1_slope_cut_zr->SetLineColor (kBlue);
-    h1_angle_zr->Draw();
-    // h1_slope_cut_zr->Draw ("SAME");
-    c0_->Print ("Cosmic_tracks_fitting_angle_distribution_zr.pdf");
-    c0_->Clear();
-    c0_->cd();
-    h1_constant_zr->Draw();
-    c0_->Print ("Cosmic_tracks_fitting_constant_distribution_zr.pdf");
-    c0_->Clear();
-    c0_->cd();
-    h1_chi2_xy->SetMaximum (100);
-    h1_chi2_xy->SetLineColor (kRed);
-    h1_resi_xy->SetLineColor (kBlue);
-    h1_chi2_xy->Draw();
-    h1_resi_xy->Draw ("SAMES");
-    gPad->Update();   // Without gPad->Update() the line h->FindObject("stats") returns a null pointer.
-    TPaveStats *st1 = (TPaveStats *)h1_resi_xy->FindObject ("stats");
-    st1->SetX1NDC (0.6);    // lower left x
-    st1->SetX2NDC (0.75);   // lower left y
-    st1->SetY1NDC (0.85);   // lower left x + some width
-    st1->SetY2NDC (0.95);   // lower left y + some height
-    // st1->SetLineColor (kRed);
-    c0_->Print ("Cosmic_tracks_fitting_chi2ndf_vs_residual_distribution_xy.pdf");
-    c0_->Clear();
-    c0_->cd();
-    h1_chi2_zr->SetMaximum (20);
-    h1_chi2_zr->SetLineColor (kRed);
-    h1_resi_zr->SetLineColor (kBlue);
-    h1_chi2_zr->Draw();
-    h1_resi_zr->Draw ("SAMES");
-    c0_->Print ("Cosmic_tracks_fitting_chi2ndf_vs_residual_distribution_zr.pdf");
-    c0_->Clear();
-    c0_->cd();
-    h2_anglge_chi2_xy->Draw ("COLZ");
-    c0_->Print ("Cosmic_tracks_fitting_chi2ndf_vs_angle_correlation_xy.pdf");
-    c0_->Clear();
-    c0_->cd();
-    h2_anglge_resi_xy->Draw ("COLZ");
-    c0_->Print ("Cosmic_tracks_fitting_residual_vs_angle_correlation_xy.pdf");
-    c0_->Clear();
-    c0_->cd();
-    h1_resi_xy_4clus->SetMaximum (100);
-    h1_resi_xy_4clus->SetLineColor (kRed);
-    h1_resi_xy_5clus->SetLineColor (kBlue);
-    h1_resi_xy_4clus->Draw();
-    h1_resi_xy_5clus->Draw ("SAME");
-    c0_->Print ("Cosmic_tracks_fitting_residual.pdf");
-
-    f->Close();
-    // delete tree, h1_angle_xy, h1_constant_xy, h1_angle_zr, h1_constant_zr, c0_;
+    // c0_->cd();
+    // // h1_resi_xy_4clus->SetMaximum (200);
+    // h1_resi_xy_4clus->SetLineColor (kRed);
+    // h1_resi_xy_5clus->SetLineColor (kBlue);
+    // h1_resi_xy_6clus->SetLineColor (kGreen);
+    // h1_resi_xy_4clus->Draw();
+    // h1_resi_xy_5clus->Draw ("SAME");
+    // h1_resi_xy_6clus->Draw ("SAME");
+    // // c0_->Print ("test/Cosmic_tracks_fitting_residual.pdf");
+    // c0_->Clear();
 }

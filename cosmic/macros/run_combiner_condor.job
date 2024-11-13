@@ -1,0 +1,18 @@
+Universe           = vanilla
+Initialdir         = /sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/macros
+Executable         = run_combiner.sh
+PeriodicHold       = (NumJobStarts >= 1 && JobStatus == 1)
+concurrency_limits = CONCURRENCY_LIMIT_DEFAULT:1000
+request_memory     = 12GB
+Priority           = 20
+job_lease_duration = 86400
+
+nevents            = 0
+use_cdb            = true
+is_debug           = false
+Error              = /sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/macros/condor_log/condor_2024combine_$(process).err
+Output             = /sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/macros/condor_log/condor_2024combine_$(process).out
+Log                = /tmp/condor_wctang$(process).log
+
+Arguments          = $(runnumber) $(nevents) $(process) $(use_cdb) $(is_debug)
+Queue runnumber from run_combiner_queue.list  

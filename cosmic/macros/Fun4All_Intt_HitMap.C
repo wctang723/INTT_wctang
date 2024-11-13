@@ -2,30 +2,26 @@
 #define FUN4ALL_INTT_BCOFINDER_C
 
 #include "Fun4All_Intt_HitMap.hh"
-#include "functions.hh"
 
-R__LOAD_LIBRARY (libfun4all.so)
-R__LOAD_LIBRARY (libfun4allraw.so)
-R__LOAD_LIBRARY (libffarawmodules.so)
-R__LOAD_LIBRARY (libinttcosmicshotmap.so)
+using namespace std;
 
-void Fun4All_Intt_HitMap (
-    int         run_num = 26969,
-    int         nevents = 10000,
-    std::string in_file = "/direct/sphenix+tg+tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/InttProduction/ProdDST/intt-00026969.root") {
+void Fun4All_Intt_HitMap (int    run_num = 26969,
+                          int    nevents = 10000,   // The number of events for hit map check (and also for hot channel) don't need to be high! 10K maybe enough
+                          string in_file = "/direct/sphenix+tg+tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/InttProduction/ProdDST/intt-00026969.root") {
     Fun4AllServer *se = Fun4AllServer::instance();
     // se->Verbosity(5);
 
-    // just if we set some flags somewhere in this macro
+    //* Just if we set some flags somewhere in this macro
     recoConsts *rc = recoConsts::instance();
 
     Enable::CDB = true;
-    // global tag
+    //* global tag
     rc->set_StringFlag ("CDB_GLOBALTAG", CDB::global_tag);
 
-    // 64 bit timestamp
+    //* 64 bit timestamp
     rc->set_uint64Flag ("TIMESTAMP", CDB::timestamp);
-    //--input
+
+    //*input
     Fun4AllInputManager *in = new Fun4AllDstInputManager ("DSTin");
     in->Verbosity (2);
     in->fileopen (in_file);
@@ -39,7 +35,7 @@ void Fun4All_Intt_HitMap (
     intthitmap->SetBCOcut (false);
     // std::string bco_input_file = "/sphenix/tg/tg01/commissioning/INTT/QA/bco_bcofull_difference/rootfile/2023/ladder_20869_3BCOcut.root";
     // intthitmap->SetBCOFile(bco_input_file.c_str());
-    intthitmap->SetFeeMapFile ("InttFeeMap.root");
+    // intthitmap->SetFeeMapFile ("InttFeeMap.root"); //* Not used in the implementation...
     se->registerSubsystem (intthitmap);
 
     //////////////////////////////////////

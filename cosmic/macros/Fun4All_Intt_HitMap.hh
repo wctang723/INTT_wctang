@@ -33,6 +33,8 @@
 
 R__LOAD_LIBRARY (libfun4all.so)
 R__LOAD_LIBRARY (libtrack_io.so)
+R__LOAD_LIBRARY (libfun4allraw.so)
+R__LOAD_LIBRARY (libffarawmodules.so)
 
 #include <CosmicHotchannel.h>
 R__LOAD_LIBRARY (libCosmicHotchannel.so)

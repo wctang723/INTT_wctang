@@ -175,14 +175,14 @@ void CosmicHotchannel::Print (const std::string &what) const {
     std::cout << "CosmicHotchannel::Print(const std::string &what) const Printing info for " << what << std::endl;
 }
 
-// int CosmicHotchannel::SetFeeMapFile (const char *feemapfile) {
-//     feemapname_ = feemapfile;
-//     if ( fee_map.LoadFromFile (feemapname_) ) {
-//         std::cerr << "failed to load fee map" << std::endl;
-//         return 1;
-//     }
-//     return 0;
-// }
+int CosmicHotchannel::SetFeeMapFile (const char *feemapfile) {
+    feemapname_ = feemapfile;
+    if ( fee_map.LoadFromFile (feemapname_) ) {
+        std::cerr << "failed to load fee map" << std::endl;
+        return 1;
+    }
+    return 0;
+}
 
 int CosmicHotchannel::SetBCOFile (const char *bcofile) {
     if ( !isBCOcutON_ ) {

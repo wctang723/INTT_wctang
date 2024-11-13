@@ -1,0 +1,5 @@
+In file included from input_line_8:1:
+/direct/sphenix+tg+tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/macros/Fun4All_Clustering.C:12:5: error: use of undeclared identifier 'output_dst'
+    output_dst += "_" + to_string (job_num);
+    ^
+root.exe: /sphenix/user/phnxbld/workarea/sPHENIX_SL7.3/gcc-12.1.0/root-6.26.06.p01/root-6.26.06/interpreter/llvm/src/tools/clang/lib/AST/DeclCXX.cpp:1391: clang::CXXMethodDecl* clang::CXXRecordDecl::getLambdaCallOperator() const: Assertion `!Calls.empty() && "Missing lambda call operator!"' failed.

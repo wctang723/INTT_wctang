@@ -1,0 +1,15 @@
+Universe           = vanilla
+Initialdir         = /sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/macros
+Executable         = run_chanclassifier.sh 
+PeriodicHold       = (NumJobStarts >= 1 && JobStatus == 1)
+concurrency_limits = CONCURRENCY_LIMIT_DEFAULT:1000
+request_memory     = 4000MB
+Priority           = 20
+job_lease_duration = 86400
+
+Output             = /sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/macros/condor_log/condor_classifier_$(process).out
+Error              = /sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/macros/condor_log/condor_classifier_$(process).err
+Log                = /tmp/condor_wctang_1_$(process).log
+
+Arguments          = $(runnumber)
+Queue runnumber from run_chanclassifier_queue.list 

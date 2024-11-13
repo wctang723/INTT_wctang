@@ -1,0 +1,17 @@
+Universe           = vanilla
+Initialdir         = /sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/macros
+Executable         = run_cluster.sh
+PeriodicHold       = (NumJobStarts >= 1 && JobStatus == 1)
+concurrency_limits = CONCURRENCY_LIMIT_DEFAULT:1000
+request_memory     = 8GB
+Priority           = 20
+job_lease_duration = 86400
+
+nevent             = 0
+is_skip            = 0
+Output             = /sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/macros/condor_log/condor_cluster_$(process).out
+Error              = /sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/macros/condor_log/condor_cluster_$(process).err
+Log                = /tmp/condor_wctang_1_$(process).log
+
+Arguments          = $(runnumber) $(nevent) $(process) $(is_skip)
+Queue runnumber from run_cluster_queue.list  

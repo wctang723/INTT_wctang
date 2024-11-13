@@ -1,9 +1,23 @@
 #include "CosmicTracking_Fun4All.hh"
 
-const string &inputFile = "/sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/DST_files/data/dst_files/2024/DST_cosmics_intt_00039525_10000events_no_hot_clusterized.root";
+using namespace std;
 
-int CosmicTracking_Fun4All (string input_dstfile = "/sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/DST_files/data/dst_files/2024/DST_cosmics_intt_00039525_10000events_no_hot_clusterized.root",
-                            int run_num = 39525, int nEvents = 10000, const int skip = 0) {
+// const string &inputFile = "/sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/DST_files/data/dst_files/2024/DST_cosmics_intt_00039468_no_hot_clusterized.root";
+
+int CosmicTracking_Fun4All (int run_num = 39468, int nEvents = 0, const int skip = 0, int job_num = 0) {
+    string run_num_str = GetRunNum8digits (run_num);   // string( 8 - to_string(run_num).size(),'0' ) + to_string( run_num );
+    string inputFile   = kIntt_dst_dir + to_string (run_num) + "/" + "DST_cosmics_intt_" + run_num_str;
+
+    // if ( nEvents != 0 ) inputFile += "_" + std::to_string (nEvents) + "events";
+    // inputFile += "_no_hot_clusterized_" + to_string (job_num) + ".root";
+    inputFile += "_no_hot_clusterized.root";
+
+    string outputFile = "cosmics_intt_" + run_num_str;
+    // if ( nEvents != 0 ) outputFile += "_" + std::to_string (nEvents) + "events";
+    outputFile += "_" + to_string (job_num) + ".root";
+
+    string outputdir = kIntt_qa_cosmics_dir;
+
     Fun4AllServer *se = Fun4AllServer::instance();
     // se->Verbosity(0);
 
@@ -19,9 +33,6 @@ int CosmicTracking_Fun4All (string input_dstfile = "/sphenix/tg/tg01/commissioni
     // or set it to a fixed value so you can debug your code
     //  rc->set_IntFlag("RANDOMSEED", 12345);
 
-    string run_num_str = GetRunNum8digits (run_num);   // string( 8 - to_string(run_num).size(),
-                                                       // '0' ) + to_string( run_num );
-
     // DSTs are stored in
     // "/sphenix/tg/tg01/commissioning/INTT/data/dst_files/{year}" A DST to be
     // fed to this macro is supposed to
@@ -36,35 +47,23 @@ int CosmicTracking_Fun4All (string input_dstfile = "/sphenix/tg/tg01/commissioni
     + "_no_hot_clusterized.root";
     */
 
-    const string &inputFile_dir = "/sphenix/u/wctang/workspace/my_INTT/cosmic/DST_files/data/dst_files/2024/";
-    cout << "Input file name: " << input_dstfile << endl;
+    cout << "Input file name: " << inputFile << endl;
 
-    INPUTREADHITS::filename[0] = input_dstfile;
+    INPUTREADHITS::filename[0] = inputFile;
 
     // This is needed to read a DST file(s).
     Fun4AllInputManager *in = new Fun4AllDstInputManager ("DSTin");
-    in->fileopen (input_dstfile);
-    // in->AddListFile(inputfile); // to read a list of files, use it. A path to
-    // the text file needs to be given.
+    in->fileopen (inputFile);
+    // in->AddListFile(inputFile); // to read a list of files, use it. A path to the text file needs to be given.
     se->registerInputManager (in);
     se->Print ("NODETREE");   // useless
 
-    //  InputInit();
+    // InputInit();
 
-    // Flag Handler is always needed to read flags from input (if used)
-    // and update our rc flags with them. At the end it saves all flags
-    // again on the DST in the Flags node under the RUN node
+    //* Flag Handler is always needed to read flags from input (if used) and update our rc flags with them.
+    //* At the end it saves all flags again on the DST in the Flags node under the RUN node
     FlagHandler *flag = new FlagHandler();
     se->registerSubsystem (flag);
-
-    // QaInttCosmicCommissioning* qicc = new QaInttCosmicCommissioning();
-    // qicc->SetData( inputFile );
-    // se->registerSubsystem( qicc );
-
-    // se->skip(skip);
-    // se->run(nEvents);
-    // se->End();
-    // return 0;
 
     ///////////////////////////////////////////////////////////////////////////////////
     // Something depends on Acts should be below.... //
@@ -114,26 +113,19 @@ int CosmicTracking_Fun4All (string input_dstfile = "/sphenix/tg/tg01/commissioni
     // string outputFile = kIntt_qa_cosmics_dir + "root/" + "cosmics_intt_" +
     // run_num_str + ".root";
 
-    string output_name = "cosmics_intt_" + run_num_str + ".root";
+    CosmicTracking *intt_cosmic = new CosmicTracking ("CosmicTracking", outputFile);
 
-    CosmicTracking *intt_cosmic = new CosmicTracking ("CosmicTracking", output_name);
-
-    //  intt_cosmic->SetData( input_dstfile );
-    intt_cosmic->SetOutputPath (kIntt_qa_cosmics_dir);
+    // intt_cosmic->SetOutputPath (kIntt_qa_cosmics_dir);
+    intt_cosmic->SetOutputPath (outputdir.c_str());
+    // intt_cosmic->SetRawDataCheck();   //* To set the selection case
     se->registerSubsystem (intt_cosmic);
-
-    //  QaInttCosmicCommissioning* qicc = new QaInttCosmicCommissioning();
-    //  qicc->SetData( inputFile );
-    //  se->registerSubsystem( qicc );
 
     se->skip (skip);
     se->run (nEvents);
     se->End();
 
-    cout << "Input: " << input_dstfile << endl;
-    cout << "Output: " << intt_cosmic->GetOutputRoot()
-         << endl;   // find the path at AnalysisInttCosmicCommissioning.cc line
-                    // 389
+    cout << "Input: " << inputFile << endl;
+    cout << "Output: " << intt_cosmic->GetOutputRoot() << endl;
     cout << "Output PDF: " << intt_cosmic->GetOutputPdf() << endl;
     delete se;
 

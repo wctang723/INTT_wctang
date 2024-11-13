@@ -33,7 +33,7 @@ bool isGood(const string &infile) {
 }
 
 void Fun4All_Intt_Combiner (int       nEvents   = 10000,   //* 0 means process all the events
-                            const int runnumber = 39367, const string cdbglobaltag = "ProdA_2023",
+                            const int runnumber = 39522, const string cdbglobaltag = "ProdA_2024",
                             const bool runTrkrHits = false, const bool applyHotChannel = false,
                             const bool applyBCOCut = false, const bool applyADCConversion = false,
                             const bool runTkrkClus = false, const bool usesurveygeom = false,

@@ -14,11 +14,11 @@ CosmicTracking::CosmicTracking (const string &name, const string &output_name)
     c_ = new TCanvas ("name", "title", 800, 800);
     c_->Divide (2, 2);
 
-    //* +-------------+
-    //* |  xy  |  zy  |
-    //* +-------------+
-    //* |  zr  |  zx  |
-    //* +-------------+
+    //* +-------------------+
+    //* |  xy (0) |  zy (1) |
+    //* +-------------------+
+    //* |  zr (3) |  zx (2) |
+    //* +-------------------+
 
     c_hitmap_ = new TCanvas ("hitmap", "hitmap", 800, 800);
 
@@ -30,10 +30,14 @@ CosmicTracking::CosmicTracking (const string &name, const string &output_name)
     for ( unsigned int i = 0; i < vcoordinates_.size(); i++ ) {
         string name = "line_" + Int2Coordinate (vcoordinates_[i].first) + Int2Coordinate (vcoordinates_[i].second);
 
-        // Setting range of the fitting function
-        // 2 means z, so 25 is enough. Others can be x or y, so 11 is enough.
-        double xmax = (vcoordinates_[i].first == 2 ? 25 : 11);
-        lines_[i]   = new TF1 (name.c_str(), "pol1", -xmax, xmax);
+        //* Setting range of the fitting function
+        //* 2 means z, so 25 is enough. Others can be x or y, so 11 is enough.
+        double xmax     = (vcoordinates_[i].first == 2 ? 25 : 11);
+        lines_[i]       = new TF1 (name.c_str(), "pol1", -xmax, xmax);
+        lines_rotate[i] = new TF1 ("line", "pol1", -xmax, xmax);
+        mg[i]           = new TMultiGraph();
+        // mg[i]->GetXaxis()->SetLimits (-xmax, xmax);
+        // mg[i]->GetYaxis()->SetRangeUser (-11, 11);
     }
 }
 
@@ -44,17 +48,18 @@ CosmicTracking::~CosmicTracking() {
 int CosmicTracking::Init (PHCompositeNode *topNode) {
     std::cout << "Init(PHCompositeNode *topNode) Initializing" << std::endl;
     InitPaths();
-    string outFilename = output_root_file_;   // output_name_;
+    string outFilename = output_root_file_;
 
     outFile_ = new TFile (outFilename.c_str(), "RECREATE");
     outTree_ = new TTree ("cluster_tree", "cluster_tree");
 
-    // event information
-    outTree_->Branch ("n_cluster", &n_cluster_);
-    outTree_->Branch ("event", &misc_counter_);   // misc_counter_ = event number
-    outTree_->Branch ("bco", &bco_);
+    //* event information
+    outTree_->Branch ("n_cluster", &n_cluster_);           //* n clusters means "The clusters include in a cosmic combination"
+    outTree_->Branch ("total_cluster", &total_cluster_);   //* the total clusters means the "The actually clusters includes in a event"
+    outTree_->Branch ("event", &misc_counter_);            //* misc_counter_ = event number
+    // outTree_->Branch ("bco", &bco_);                       //*bco is not used currently
 
-    // cluster information
+    //* cluster information
     outTree_->Branch ("posX", &posX_);
     outTree_->Branch ("posY", &posY_);
     outTree_->Branch ("posZ", &posZ_);
@@ -66,6 +71,7 @@ int CosmicTracking::Init (PHCompositeNode *topNode) {
     g_hitmap_->SetStats (0);
     // g_hitmap_->SetMaximum(1000);
     g_hitmap_->SetMinimum (0);
+    lat = new TLatex();
 
     selected_event_number  = 0;
     number_cluster_equal_5 = 0;
@@ -73,7 +79,7 @@ int CosmicTracking::Init (PHCompositeNode *topNode) {
     number_cluster_equal_7 = 0;
     number_cluster_equal_8 = 0;
 
-    // fitted line information
+    //* fitted line information
     for ( unsigned int i = 0; i < vcoordinates_.size(); i++ ) {
         string coordinate_name = Int2Coordinate (vcoordinates_[i].first) + Int2Coordinate (vcoordinates_[i].second);
 
@@ -116,70 +122,104 @@ int CosmicTracking::process_event (PHCompositeNode *topNode) {
         cout << "Fun4AllReturnCode is abort... " << endl;
         return Fun4AllReturnCodes::ABORTEVENT;
     }
+    misc_counter_++;   //* Events that have been processed
 
-    // cout << "Event: " << misc_counter_ << "\t"
-    //      << setprecision(15) << setw(17) << node_intteventheader_map_->get_bco_full();
+    //* The part for bco is not used currently
+    // cout << "Event: " << misc_counter_ << "\t" << setprecision(15) << setw(17) << node_intteventheader_map_->get_bco_full();
+    // bco_ = node_intteventheader_map_->get_bco_full();
+    // if ( false ) {
+    //     cout << string (50, '=') << "\n"
+    //          << "Event information: "
+    //          << "bco full: " << setw (16)
+    //          << node_intteventheader_map_->get_bco_full() << endl;
+    // }
+    // bco_ = node_intteventheader_map_->get_bco_full();
+    // if ( false ) this->ProcessEventRawHit();
 
-    misc_counter_++;   // Events that have been processed
-    bco_ = node_intteventheader_map_->get_bco_full();
-
-    if ( false ) {
-        cout << string (50, '=') << "\n"
-             << "Event information: "
-             << "bco full: " << setw (16)
-             << node_intteventheader_map_->get_bco_full() << endl;
-    }
-    bco_ = node_intteventheader_map_->get_bco_full();
-    if ( false ) this->ProcessEventRawHit();
-
-    auto clusters = this->GetClusters();   // vector < pair < TrkrCluster*, const Acts::vector3 > >
-
-    /////////////////////
-    // event selection //
-    /////////////////////
-    //  if (raw_hit_num > 40) return Fun4AllReturnCodes::EVENT_OK;
-    //  if (clusters_pair.size() > 10 || clusters_pair.size() < 3) return
-    //  Fun4AllReturnCodes::EVENT_OK;
-
-    // analyze events having 4 == #cluster
-    if ( clusters.size() > 7 || clusters.size() < 4 ) {
-        // cout << "This event is not within 4~6 cluster!" << endl;
+    auto clusters = this->GetClusters();   //* vector < pair <TrkrCluster*, const Acts::vector3> >
+    if ( clusters.size() == 0 ) {
+        empty_event++;
         return Fun4AllReturnCodes::EVENT_OK;
     }
 
-    if ( clusters.size() > 4 ) {
-        if ( clusters.size() == 5 ) number_cluster_equal_5++;
-        if ( clusters.size() == 6 ) number_cluster_equal_6++;
-        if ( clusters.size() == 7 ) number_cluster_equal_7++;
-        if ( clusters.size() == 8 ) number_cluster_equal_8++;
-        combinations = MathFunction::generateAllSubsets (clusters, 4);
-        for ( long unsigned int i = 0; i < combinations.size(); i++ ) {
-            nums_subsets = combinations[i];
-            this->MakeGraphs (nums_subsets);
-            this->Fit();
-            this->resetparameters();
-            nums_subsets.clear();
-        }
+    //* Event selection part
+    switch ( event_selection ) {
+        case 1:
+
+        default:
+            cout << "Swithc to default selection case..." << endl;
+            cout << "The total cluster before cut is: " << clusters.size() << endl;
+
+            //* Some raw check "before" cluster cut and event selection
+            h1_total_cluster_before_cut->Fill (clusters.size());
+            for ( auto &before : clusters ) {
+                unsigned int clusteradc  = before->getAdc();
+                unsigned int clustersize = before->getSize();
+                unsigned int phisize     = before->getPhiSize();
+                cout << "Before cut, cluster adc: " << clusteradc << ", cluster size: " << clustersize << endl;
+                h1_cluster_adc_before_cut->Fill (clusteradc);
+                h1_cluster_size_before_cut->Fill (clustersize);
+                h1_phi_size_before_cut->Fill (phisize);
+                h2_cluster_size_adc_before->Fill (clusteradc, clustersize);
+            }
+
+            //* The cut for good clusters
+            if ( is_cluster_cut ) this->ClusterCut (clusters);
+
+            cout << "The total cluster after cut is: " << clusters.size() << endl;
+            //* Some raw check "after" cluster cut and event selection
+            h1_total_cluster_after_cut->Fill (clusters.size());
+            for ( auto &after : clusters ) {
+                unsigned int clusteradc  = after->getAdc();
+                unsigned int clustersize = after->getSize();
+                unsigned int phisize     = after->getPhiSize();
+                cout << "After cut, cluster adc: " << clusteradc << ", cluster size: " << clustersize << endl;
+                h1_cluster_adc_after_cut->Fill (clusteradc);
+                h1_cluster_size_after_cut->Fill (clustersize);
+                h1_phi_size_after_cut->Fill (phisize);
+                h2_cluster_size_adc_after->Fill (clusteradc, clustersize);
+            }
+
+            //* raw hit selection, not used here
+            // if ( raw_hit_num > 40 ) return Fun4AllReturnCodes::EVENT_OK;
+
+            //* # of total clusters selection
+            if ( clusters.size() > 7 || clusters.size() < 4 ) {
+                cout << "This event is not within 4~7 cluster!" << endl;
+                return Fun4AllReturnCodes::EVENT_OK;
+            }
+
+            //* For ploting index
+            combinations_ith = 0;   //* equal to total_clusters
+            combinations_jth = 0;   //* equal to n_cluster
+            combinations_kth = 0;   //* the index of current combination
+
+            total_cluster_   = clusters.size();
+            combinations_ith = total_cluster_;
+            cout << "The total cluster of this event is " << total_cluster_ << "......................." << endl;
+            if ( clusters.size() >= 4 ) {
+                if ( clusters.size() == 5 ) number_cluster_equal_5++;
+                if ( clusters.size() == 6 ) number_cluster_equal_6++;
+                if ( clusters.size() == 7 ) number_cluster_equal_7++;
+                for ( int j = total_cluster_; j >= 4; --j ) {
+                    combinations_jth = j;
+                    cout << "Here is the start of generate subsets................................" << endl;
+                    combinations = MathFunction::generateAllSubsets (clusters, j);
+                    for ( long unsigned int k = 0; k < combinations.size(); k++ ) {
+                        combinations_kth = k;
+                        nums_subsets     = combinations[k];
+                        this->MakeGraphs (nums_subsets);
+                        this->Fit();
+                        this->resetparameters();
+                        nums_subsets.clear();
+                    }
+                    combinations.clear();
+                    cout << "Here is the end of generate subsets................................." << endl;
+                }
+            }
     }
-    /*
-       vector<double> distances;
-       for (int i = 0; i < int(clusters.size()); i++) {
-       auto pos_cluster1 = clusters[i].second;
-       for (int j = i + 1; j < int(clusters.size()); j++) {
-       auto pos_cluster2 = clusters[j].second;
 
-    // auto pos_diff = pos_cluster1 - pos_cluster2;
-
-    distances.push_back(GetDistanceXY(pos_cluster1, pos_cluster2));
-    */
-
-    this->MakeGraphs (clusters);
     this->HitMapCheck (clusters);
-    // if (*max_element(distances.begin(), distances.end()) < 8) return
-    // Fun4AllReturnCodes::EVENT_OK; if (!(IsYFired_[0] && IsYFired_[1])) return
-    // Fun4AllReturnCodes::EVENT_OK;
-
-    this->Fit();
 
     selected_event_number++;
     return Fun4AllReturnCodes::EVENT_OK;
@@ -188,6 +228,7 @@ int CosmicTracking::process_event (PHCompositeNode *topNode) {
 //____________________________________________________________________________..
 int CosmicTracking::ResetEvent (PHCompositeNode *topNode) {
     this->resetparameters();
+    total_cluster_ = -9999;
 
     // Event counter
     // misc_counter_++;
@@ -219,16 +260,40 @@ int CosmicTracking::End (PHCompositeNode *topNode) {
     // c_->Print( "yz_plane.pdf]" );
     outFile_->cd();
     outTree_->Write();
+    // h1_angle_xy->Write();
+    h1_resi_xy_4clus->Write();
+    h1_resi_xy_5clus->Write();
+    h1_resi_xy_6clus->Write();
+    h1_resi_xy_7clus->Write();
+    h1_resi_zr_4clus->Write();
+    h1_resi_zr_5clus->Write();
+    h1_resi_zr_6clus->Write();
+    h1_resi_zr_7clus->Write();
+
+    h2_cluster_size_adc_before->Write();
+    h2_cluster_size_adc_after->Write();
+    h1_total_cluster_before_cut->Write();
+    h1_total_cluster_after_cut->Write();
+    h1_cluster_size_before_cut->Write();
+    h1_cluster_size_after_cut->Write();
+    h1_phi_size_before_cut->Write();
+    h1_phi_size_after_cut->Write();
+    h1_cluster_adc_before_cut->Write();
+    h1_cluster_adc_after_cut->Write();
+
     outFile_->Close();
 
     cout << "Total events number: " << misc_counter_ << endl;
-    cout << "Total event selected (only cluster size = 4): " << selected_event_number << endl;
+    cout << "Total event selected: " << selected_event_number << endl;
+    cout << "Total empty event: " << empty_event << endl;
     cout << "Total number of cluster size equals to 5: " << number_cluster_equal_5 << endl;
     cout << "Total number of cluster size equals to 6: " << number_cluster_equal_6 << endl;
     cout << "Total number of cluster size equals to 7: " << number_cluster_equal_7 << endl;
 
     delete c_;
     delete c_hitmap_;
+    delete l;
+    delete lat;
 
     std::cout << "End(PHCompositeNode *topNode) This is the End..." << std::endl;
     return Fun4AllReturnCodes::EVENT_OK;
@@ -503,12 +568,23 @@ void CosmicTracking::DrawIntt (double xmax, double ymax) {
     }
 }
 
-int CosmicTracking::MakeGraphs (vector<TrkrCluster *> &clusters) {
+void CosmicTracking::MakeGraphs (vector<TrkrCluster *> &clusters) {
     for ( unsigned int i = 0; i < vcoordinates_.size(); i++ ) {
         graphs_[i] = new TGraphErrors();
         graphs_[i]->SetMarkerStyle (20);
-        graphs_[i]->SetMarkerColor (kAzure + 1);
+        graphs_[i]->SetMarkerColor (kAzure - 1);
+        graphs_rotate[i] = new TGraphErrors();
+        graphs_rotate[i]->SetMarkerStyle (20);
+        graphs_rotate[i]->SetMarkerColor (kAzure - 1);
+        if ( combinations_jth == combinations_ith ) {
+            graphs_background[i] = new TGraphErrors();
+            graphs_background[i]->SetMarkerStyle (20);
+            graphs_background[i]->SetMarkerColor (14);
+        }
     }
+    // graph_zr_rotate = new TGraphErrors();
+    // graph_zr_rotate->SetMarkerStyle (20);
+    // graph_zr_rotate->SetMarkerColor (kAzure + 1);
 
     int clu_i = 0;
     for ( auto &cluster : clusters ) {
@@ -523,16 +599,28 @@ int CosmicTracking::MakeGraphs (vector<TrkrCluster *> &clusters) {
         double rad = 0.0;   // distance of the cluster point from the origin of the coodinate
         // loop over 3 graphs
         for ( unsigned int i = 0; i < vcoordinates_.size(); i++ ) {
-            //* If the coordinate is r
+            //* If the coordinate is r, continue
             if ( vcoordinates_[i].first == 3 || vcoordinates_[i].second == 3 ) continue;
             else if ( i < 2 ) {
-                // radius in xy plane
+                //* radius in xy plane
                 rad += cluster->getPosition (i) * cluster->getPosition (i);   // add a squared distance in i-th coordinate
             }
-
-            graphs_[i]->AddPoint (
-                cluster->getPosition (vcoordinates_[i].first),     // x, z, z
-                cluster->getPosition (vcoordinates_[i].second));   // y, y, x
+            //* Rotate the plots by 90 degree counterclockwise here
+            graphs_[i]->AddPoint (-(cluster->getPosition (vcoordinates_[i].second)), cluster->getPosition (vcoordinates_[i].first));
+            //* Original plot direction
+            graphs_rotate[i]->AddPoint (cluster->getPosition (vcoordinates_[i].first), cluster->getPosition (vcoordinates_[i].second));
+            if ( combinations_jth == combinations_ith ) graphs_background[i]->AddPoint (cluster->getPosition (vcoordinates_[i].first), cluster->getPosition (vcoordinates_[i].second));
+            if ( i != 0 ) {
+                if ( cluster->getPosition (2) < 12.8 && cluster->getPosition (2) > -12.8 ) {
+                    graphs_[i]->SetPointError (clu_i, 0, 0.8);
+                    graphs_rotate[i]->SetPointError (clu_i, 0.8, 0);
+                    if ( combinations_jth == combinations_ith ) graphs_background[i]->SetPointError (clu_i, 0.8, 0);
+                } else {
+                    graphs_[i]->SetPointError (clu_i, 0, 1);
+                    graphs_rotate[i]->SetPointError (clu_i, 1, 0);
+                    if ( combinations_jth == combinations_ith ) graphs_background[i]->SetPointError (clu_i, 1, 0);
+                }
+            }
         }
 
         //* Apply  squart. Sign depends on the sign of y coordinate.
@@ -540,12 +628,23 @@ int CosmicTracking::MakeGraphs (vector<TrkrCluster *> &clusters) {
         //* graph for rz plane, applying z axis error
         if ( cluster->getPosition (2) < 12.8 && cluster->getPosition (2) > -12.8 ) {
             //* Rotate the graph by 90 degree, otherwise the fitting might have some problems
-            // graphs_[3]->AddPoint (cluster->getPosition (2), rad);
-            graphs_[3]->AddPoint (-(rad), cluster->getPosition (2));
+            graphs_[3]->AddPoint (-(rad), cluster->getPosition (2));   //* Rotate by 90 degree counterclockwise (x,y) -> (-y, x)
             graphs_[3]->SetPointError (clu_i, 0, 0.8);
+            graphs_rotate[3]->AddPoint (cluster->getPosition (2), rad);   //* Original plots
+            graphs_rotate[3]->SetPointError (clu_i, 0.8, 0);
+            if ( combinations_jth == combinations_ith ) {
+                graphs_background[3]->AddPoint (cluster->getPosition (2), rad);
+                graphs_background[3]->SetPointError (clu_i, 0.8, 0);
+            }
         } else {
             graphs_[3]->AddPoint (-(rad), cluster->getPosition (2));
             graphs_[3]->SetPointError (clu_i, 0, 1);
+            graphs_rotate[3]->AddPoint (cluster->getPosition (2), rad);
+            graphs_rotate[3]->SetPointError (clu_i, 1, 0);
+            if ( combinations_jth == combinations_ith ) {
+                graphs_background[3]->AddPoint (cluster->getPosition (2), rad);
+                graphs_background[3]->SetPointError (clu_i, 1, 0);
+            }
         }
 
         cout << "z positon: " << cluster->getPosition (2) << ", and rad: " << rad << endl;
@@ -561,10 +660,10 @@ int CosmicTracking::MakeGraphs (vector<TrkrCluster *> &clusters) {
         // cluster->getPhiSize() << "\t" << cluster->getZSize() << endl;
     }
 
-    return 0;
+    clu_ith = clu_i;   //* clu_ith is the # of the clusters that is processed by MakeGraphs
 }
 
-int CosmicTracking::HitMapCheck (vector<TrkrCluster *> &clusters) {
+void CosmicTracking::HitMapCheck (vector<TrkrCluster *> &clusters) {
     for ( auto &cluster : clusters ) {
         pos_xyz = {cluster->getPosition (0), cluster->getPosition (1), cluster->getPosition (2)};
 
@@ -572,8 +671,6 @@ int CosmicTracking::HitMapCheck (vector<TrkrCluster *> &clusters) {
         cout << "Position at x: " << get<0> (pos_xyz) << ", and the position at y:" << get<1> (pos_xyz) << endl;
         g_hitmap_->Fill (get<0> (pos_xyz), get<1> (pos_xyz));
     }
-
-    return 0;
 }
 
 bool CosmicTracking::IsFittable (TGraphErrors *g) {
@@ -582,7 +679,7 @@ bool CosmicTracking::IsFittable (TGraphErrors *g) {
       @details If all clusters are on the same chip columns, they have the same z-coordinate (if ladder positions are not modified by the survery geometry). In this case, this graph cannot be fitted.
     */
 
-    // get all x values
+    //* get all x values
     vector<double> values;
     for ( int i = 0; i < g->GetN(); i++ ) {
         double x, y;
@@ -590,7 +687,7 @@ bool CosmicTracking::IsFittable (TGraphErrors *g) {
         values.push_back (x);
     }
 
-    // compare y values
+    //* compare y values
     for ( unsigned int i = 1; i < values.size(); i++ ) {
         // if the difference is larger than the length of a chip type-A, it's OK to be fitted.
         if ( fabs (values[0] - values[i]) >= 0.16 ) {
@@ -604,94 +701,178 @@ bool CosmicTracking::IsFittable (TGraphErrors *g) {
     return false;
 }
 
-int CosmicTracking::Fit() {
+void CosmicTracking::Fit() {
     bool is_fitting_good = false;
+    cout << "CosmicTracking::Fit start..." << endl;
+
+    //* The selection for whether the cluster fired the upper & lower barrel && whether there is any of two clusters that are too close to each other
+    if ( !(IsYFired_[0] && IsYFired_[1]) ) {
+        cout << "This event didn't fired the upper barrel and lower barrel together! This event will not be recorded!" << endl;
+        return;
+    }
+    for ( int i = 0; i < clu_ith; ++i ) {
+        for ( int j = 0; j < clu_ith; ++j ) {
+            if ( i == j ) continue;
+            if ( TMath::Abs ((radius_[i] - radius_[j])) < 0.0078 ) {
+                cout << "There are two clusters which are too close to each other! This event will not be recorded!" << endl;
+                return;
+            }
+        }
+    }
+
     c_->Clear();
     c_->Divide (2, 2);
-    cout << "CosmicTracking::Fit start..." << endl;
 
     for ( long unsigned int i = 0; i < vcoordinates_.size(); i++ ) {
         cout << "i th: " << i << endl;
-        // if (graphs_[i]->GetN() < 4 || graphs_[i]->GetN() > 8){} //* Condition to draw pdf and outTree_->Fill()
-        // return 0; //* Not used. Event selection should be done in process_event.
 
-        if ( IsFittable (graphs_[i]) == true ) {
-            cout << "It is fittable!" << endl;
-            graphs_[i]->Fit (lines_[i], "RN");
+        //* IsFittable function is not used here since I already rotate the plots by 90 degree. Even there is a cosmic ray came from 90 degree, it should be fittable!
+        // if ( IsFittable (graphs_[i]) == true )
+        graphs_[i]->Fit (lines_[i], "RN");
+        bool is_line_drawable = true;
 
-            constants_[i] = lines_[i]->GetParameter (0);
-            if ( i == 3 ) slopes_[i] = 1 / lines_[i]->GetParameter (1);
-            slopes_[i]   = lines_[i]->GetParameter (1);
-            chi2ndfs_[i] = lines_[i]->GetChisquare() / lines_[i]->GetNDF();
-            residual[i]  = chi2ndfs_[i] / TMath::Sqrt (1 + TMath::Power (slopes_[i], 2));
+        constants_[i] = (lines_[i]->GetParameter (0)) / (lines_[i]->GetParameter (1));                      //* converage the constant back to original coordinate
+        slopes_[i]    = -(1 / lines_[i]->GetParameter (1));                                                 //* converage the slopes back to original coordinate
+        chi2ndfs_[i]  = lines_[i]->GetChisquare() / lines_[i]->GetNDF();                                    //* chi square remains the same
+        residual[i]   = chi2ndfs_[i] / TMath::Sqrt (1 + TMath::Power ((lines_[i]->GetParameter (1)), 2));   //* residual remains the same
 
-            // Calculate the average distance
-            cout << "Here starts the calculation of average distance!" << endl;
-            double sumDistance = 0.0;
-            for ( int j = 0; j < graphs_[i]->GetN(); ++j ) {
-                double x, y;
-                graphs_[i]->GetPoint (i, x, y);
-                double distance = TMath::Abs ((slopes_[i] * x - y + constants_[i])) / TMath::Sqrt (1 + slopes_[i] * slopes_[i]);
-                sumDistance += distance;
+        //* Calculate the average distance & whether the clusters are all on the same z position
+        cout << "Here starts the calculation of average distance!" << endl;
+        double sumDistance    = 0.0;
+        double z_position_avg = 0;
+        double z_check        = 0;
+        double ax[10] = {0}, ay[10] = {0};
+        for ( int j = 0; j < graphs_[i]->GetN(); ++j ) {
+            graphs_[i]->GetPoint (j, ax[j], ay[j]);
+            double distance = TMath::Abs ((slopes_[i] * ax[j] - ay[j] + constants_[i])) / TMath::Sqrt (1 + slopes_[i] * slopes_[i]);
+            sumDistance += distance;
+            z_position_avg += ay[j];
+            if ( j == (graphs_[i]->GetN() - 1) ) {
+                z_position_avg = z_position_avg / graphs_[i]->GetN();
+                for ( int k = 0; k < graphs_[i]->GetN(); ++k ) {
+                    // cout << "z_position_avg = " << z_position_avg << " & ay[k] = " << ay[k] << endl;
+                    z_check += TMath::Abs ((z_position_avg - ay[k]));
+                    // cout << "z_check: " << z_check << endl;
+                }
             }
-            average_distances_[i] = sumDistance / graphs_[i]->GetN();
-        } else {
-            cout << "It is not fittable!" << endl;
         }
 
-        graphs_[i]->SetTitle (Form ("Event : %d", misc_counter_));
+        double angle = 0;
+        angle        = (TMath::ATan (slopes_[i])) * (180. / TMath::Pi());
+        if ( angle < 0 ) angle += 180;
+
+        //* For cosmics QA plots
+        // if ( residual[0] < 0.02 && residual[3] < 0.02 ) h1_angle_xy->Fill (angle);
+        if ( combinations_ith == 4 && combinations_jth == 4 ) {
+            if ( i == 0 ) h1_resi_xy_4clus->Fill (residual[0]);
+            if ( i == 3 ) h1_resi_zr_4clus->Fill (residual[3]);
+        } else if ( combinations_ith == 5 && combinations_jth == 5 ) {
+            if ( i == 0 ) h1_resi_xy_5clus->Fill (residual[0]);
+            if ( i == 3 ) h1_resi_zr_5clus->Fill (residual[3]);
+        } else if ( combinations_ith == 6 && combinations_jth == 6 ) {
+            if ( i == 0 ) h1_resi_xy_6clus->Fill (residual[0]);
+            if ( i == 3 ) h1_resi_zr_6clus->Fill (residual[3]);
+        } else if ( combinations_ith == 7 && combinations_jth == 7 ) {
+            if ( i == 0 ) h1_resi_xy_7clus->Fill (residual[0]);
+            if ( i == 3 ) h1_resi_zr_7clus->Fill (residual[3]);
+        }
+
+        if ( z_check < 1.6 || slopes_[i] > 1000000 ) is_line_drawable = false;
+
+        average_distances_[i] = sumDistance / graphs_[i]->GetN();
+        string plottitle;
+        plottitle = Form (" (C(%d,%d) #it{combination %d})", combinations_ith, combinations_jth, combinations_kth);
+
+        //* The plots used by the event display should be the original coordinate (before rotation)
+
         int    x_axis_num = vcoordinates_[i].first;
         int    y_axis_num = vcoordinates_[i].second;
         double xmax       = x_axis_num == 2 ? 25 : 11;   // 2 means z, so 25 is enough. Others can be x or y, so 11 is enough.
         double ymax       = y_axis_num == 2 ? 25 : 11;
         cout << "Fitting graphs are being drawn here..." << endl;
 
+        //* Here is the drawing part
         c_->cd (i + 1);
         if ( i == 2 ) c_->cd (4);
         else if ( i == 3 ) c_->cd (3);
+        // gStyle->SetTitleFontSize (0.03);
 
-        string frame_title = Int2Coordinate (x_axis_num) + " vs " + Int2Coordinate (y_axis_num) + " Event : " + to_string (misc_counter_) + ";"   // pad title
-                             + Int2Coordinate (x_axis_num) + " (cm);"                                                                             // x-axis title
-                             + Int2Coordinate (y_axis_num) + " (cm)";                                                                             // y-axis title
+        //* Draw the plots by original coordinate
+        lines_rotate[i]->SetParameters (constants_[i], slopes_[i]);
+        // mg[i]->Add (graphs_background[i]);
+        // mg[i]->Add (graphs_rotate[i]);
+
+        string frame_title = Int2Coordinate (x_axis_num) + " vs " + Int2Coordinate (y_axis_num) + " Event : " + to_string (misc_counter_) + plottitle + ";"   //* pad title
+                             + Int2Coordinate (x_axis_num) + " (cm);"                                                                                         //* x-axis title
+                             + Int2Coordinate (y_axis_num) + " (cm)";                                                                                         //* y-axis title
         auto frame = gPad->DrawFrame (-xmax, -ymax, xmax, ymax, frame_title.c_str());
         frame->GetXaxis()->CenterTitle();
         frame->GetYaxis()->CenterTitle();
         gPad->SetGrid (true, true);
+        // c_->SetTitle (Form ("Event : %d %s", misc_counter_, plottitle.c_str()));
+        gPad->Modified();
+
+        // graphs_rotate[i]->SetTitle (Form ("Event : %d test (%s)", misc_counter_, plottitle.c_str()));
+        // graphs_background[i]->SetTitle (Form ("Event : %d (%s)", misc_counter_, plottitle.c_str()));
+        // mg[i]->SetTitle (Form ("Event : %d (%s)", misc_counter_, plottitle.c_str()));
+        // mg[i]->Draw ("P"); //* Needs to remove the previous plots in the list, I don't know how...
+        graphs_background[i]->Draw ("P");
+        graphs_rotate[i]->Draw ("P SAME");
         DrawIntt (xmax, ymax);
 
-        c_->SetTitle (Form ("Event : %d", misc_counter_));
-        graphs_[i]->Draw ("P");
-        lines_[i]->Draw ("same");
+        if ( is_line_drawable == false ) {
+            cout << "The line is not drawable!!!" << endl;
+            l = new TLine (z_position_avg, -11, z_position_avg, 11);
+            l->SetLineColor (kRed);
+            l->SetLineWidth (2.);
+            l->Draw ("SAME");
+        } else {
+            lines_rotate[i]->Draw ("SAME");
+        }
+
+        //* For text on the plot
+        lat->SetTextSize (0.035);
+        double latex_x = 0;
+
+        //* for latex string
+        string phi_theta;
+        if ( i == 0 ) {
+            latex_x   = 2;
+            phi_theta = Form ("#phi = %3.3f#circ", angle);
+        } else {
+            latex_x = 4.5;
+            if ( i == 1 ) phi_theta = Form ("#angle_zy= %3.3f#circ", angle);
+            else if ( i == 2 ) phi_theta = Form ("#angle_zx = %3.3f#circ", angle);
+            else if ( i == 3 ) phi_theta = Form ("#theta = %3.3f#circ", angle);
+        }
+        lat->DrawLatex (latex_x, 8.2, Form ("Total clusters: %d", total_cluster_));
+        lat->DrawLatex (latex_x, 6.7, Form ("Selected clusters: %d", clu_ith));
+        lat->DrawLatex (latex_x, 5.2, phi_theta.c_str());
+        lat->DrawLatex (latex_x, 3.7, Form ("Residual = %.3e", residual[i]));
+        lat->Draw ("SAME");
+        // lat->DrawLatex (5, 5, Form ("Total clusters: %d", total_cluster_));
         c_->Update();
     }
 
-    //* The selection for whether the cluster fired the upper & lower barrel
-    // if ( IsYFired_[0] && IsYFired_[1] ) {
-    //     if ( print_counter_ < 101 ) {
-    //         c_->Print (output_pdf_file_.c_str());
-    //     }
+    // if ( print_counter_ < 10000 ) {
+    //     c_->Print (output_pdf_file_.c_str());
     //     print_counter_++;
     // }
-
-    if ( print_counter_ < 301 ) {
-        c_->Print (output_pdf_file_.c_str());
-        print_counter_++;
-    }
-
-    //? this line might have some problems
+    c_->Print (output_pdf_file_.c_str());
     n_cluster_ = posX_.size();
+    if ( clu_ith != n_cluster_ ) cout << "Some wrong with the n_cluster_ !!!" << endl;
 
-    // evaluate fitting quality
+    //* evaluate fitting quality (not used currently)
     if ( is_fitting_good == true ) {
         slope_consistency_    = (slopes_[0] - (slopes_[2] / slopes_[1])) / slopes_[0];                            // {a - e/c} / a
         constant_consistency_ = (constants_[0] - (constants_[2] - constants_[1]) / slopes_[1]) / constants_[0];   // {b - (f-d)/c} / b
     }
 
     outTree_->Fill();
-    cout << "Event number which is proceeding now: " << misc_counter_ << endl;
-    cout << "Number of fitted event : " << outTree_->GetEntries() << endl;
+    fit_counter_++;
 
-    return 0;
+    cout << "Event number which is proceeding now: " << misc_counter_ << endl;
+    cout << "Number of fitted event : " << fit_counter_ << endl;
 }
 
 double CosmicTracking::GetDistance (const Acts::Vector3 a, const Acts::Vector3 b, bool use_x, bool use_y, bool use_z) {
@@ -733,7 +914,11 @@ int CosmicTracking::ProcessEventRawHit() {
 void CosmicTracking::SetOutputPath (string path) {
     output_path_ = path;
     InitPaths();
-    //  this->setdata( "" ); // updating the output path
+}
+
+void CosmicTracking::SetRawDataCheck (int is_check, bool is_cluster_check) {
+    event_selection = is_check;
+    is_cluster_cut  = is_cluster_check;
 }
 
 void CosmicTracking::resetparameters() {
@@ -753,4 +938,18 @@ void CosmicTracking::resetparameters() {
 
     // initialize bool
     IsYFired_[0] = IsYFired_[1] = false;
+}
+
+int CosmicTracking::ClusterCut (vector<TrkrCluster *> &clusters, int i) {
+    //* good cluster cut
+    if ( i == (int)clusters.size() ) return 0;
+
+    unsigned int clusteradc  = clusters[i]->getAdc();
+    unsigned int clustersize = clusters[i]->getSize();
+
+    if ( clustersize > 8 || clusteradc <= adc0 ) clusters.erase (clusters.begin() + i);
+    else i++;
+
+    ClusterCut (clusters, i);
+    return 0;
 }
