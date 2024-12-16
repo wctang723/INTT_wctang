@@ -457,14 +457,16 @@ void CosmicTrackQAPlots (string file = "cosmics_intt_00039524_", string subdir =
     gErrorIgnoreLevel = kSysError;
 
     // string dir             = "test/root/39524/";
-    string dir             = "/sphenix/u/wctang/workspace/my_INTT/cosmic/DST_files/QA/cosmics/2024/root/";
-    string path            = dir + file + to_string (q) + ".root";
-    string output          = dir + "plots_" + file + to_string (q) + ".root";
-    string output_1        = dir + "plots_angle_zr_residaul_openup_" + file + to_string (q) + ".root";
-    string output_2        = dir + "plots_zr_2D_" + file + to_string (q) + ".root";
-    string output_pdf_file = dir + "event_diplay_check_" + file + to_string (q) + ".pdf";
+    string dir  = "/sphenix/u/wctang/workspace/my_INTT/cosmic/DST_files/QA/cosmics/2024/root/";
+    string path = dir + subdir + "/" + file + to_string (q) + ".root";
 
-    cout << path << endl;
+    gSystem->mkdir (TString::Format ("%s%s", dir.c_str(), subdir.c_str()));
+    string output          = dir + subdir + "/" + "plots_" + file + to_string (q) + ".root";
+    string output_1        = dir + subdir + "/" + "plots_angle_zr_residaul_openup_" + file + to_string (q) + ".root";
+    string output_2        = dir + subdir + "/" + "plots_zr_2D_" + file + to_string (q) + ".root";
+    string output_pdf_file = dir + subdir + "/" + "event_diplay_check_" + file + to_string (q) + ".pdf";
+
+    cout << "The file path: " << path << endl;
 
     // TLatex *lat = new TLatex();
 

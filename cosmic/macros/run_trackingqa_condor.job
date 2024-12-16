@@ -7,13 +7,13 @@ request_memory     = 4000MB
 Priority           = 20
 job_lease_duration = 86400
 
-path               = cosmics_intt_00039370_10000events_
-runnum             = 39369
-switchcase         = 1
+path               = cosmics_intt_00039367_
+runnum             = 39367
 is_debug           = 0
-Output             = /sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/macros/condor_log/condor_QA$(process).out
-Error              = /sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/macros/condor_log/condor_QA$(process).err
-Log                = /tmp/condor_wctangQA$(process).log
+switchcase         = 1
+Output             = /sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/macros/condor_log/condor_QA_$(process).out
+Error              = /sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/macros/condor_log/condor_QA_$(process).err
+Log                = /tmp/condor_wctangQA_$(process).log
 
 Arguments          = $(path) $(runnum) $(is_debug) $(switchcase) $(process)
-Queue 12
+Queue 27

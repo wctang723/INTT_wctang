@@ -53,6 +53,7 @@ configure
 *.txt
 output_files/
 DST_files/
+condor_log/
 
 *~
 *.root

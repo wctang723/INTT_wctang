@@ -7,11 +7,11 @@ request_memory     = 4GB
 Priority           = 20
 job_lease_duration = 86400
 
-runnumber          = 39524
+runnumber          = 39530
 run_events         = 10000
 Output             = /sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/macros/condor_log/condor_cosmic_$(process).out
 Error              = /sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/macros/condor_log/condor_cosmic_$(process).err
 Log                = /tmp/condor_wctang_1_$(process).log
 
 Arguments          = $(runnumber) $(run_events) $(process)
-Queue 13
+Queue 29

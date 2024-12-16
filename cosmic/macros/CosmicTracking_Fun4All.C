@@ -14,7 +14,7 @@ int CosmicTracking_Fun4All (int run_num = 39468, int nEvents = 0, const int skip
 
     string outputFile = "cosmics_intt_" + run_num_str;
     // if ( nEvents != 0 ) outputFile += "_" + std::to_string (nEvents) + "events";
-    outputFile += "_" + to_string (job_num) + ".root";
+    outputFile += "_" + "NoClusterCut_" + to_string (job_num) + ".root";
 
     string outputdir = kIntt_qa_cosmics_dir;
 
@@ -117,7 +117,8 @@ int CosmicTracking_Fun4All (int run_num = 39468, int nEvents = 0, const int skip
 
     // intt_cosmic->SetOutputPath (kIntt_qa_cosmics_dir);
     intt_cosmic->SetOutputPath (outputdir.c_str());
-    // intt_cosmic->SetRawDataCheck();   //* To set the selection case
+    //* SetRawDataCheck (event selection, cluster cut)
+    intt_cosmic->SetRawDataCheck (0, 0);
     se->registerSubsystem (intt_cosmic);
 
     se->skip (skip);

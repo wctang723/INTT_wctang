@@ -5,7 +5,6 @@ PeriodicHold       = (NumJobStarts >= 1 && JobStatus == 1)
 concurrency_limits = CONCURRENCY_LIMIT_DEFAULT:1000
 request_memory     = 12GB
 Priority           = 20
-job_lease_duration = 86400
 
 nevents            = 0
 use_cdb            = true

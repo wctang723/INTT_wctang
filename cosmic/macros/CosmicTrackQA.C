@@ -22,55 +22,73 @@ TH2D *h2[2];
 TH2D *h2_zr_2D;
 TH2D *h2_angle[4];
 
-TH1D *hsum1[6];
-TH1D *hsum1_resi[8];
+TH1D *hsum1[7];
+TH1D *hsum1_resi[6];
 TH1D *hsum1_angle[9];
-TH2D *hsum2[2];
+TH2D *hsum2[3];
 TH2D *hsum2_zr_2D;
 TH2D *hsum2_angle[4];
 
-void filling (string path = "/sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/DST_files/QA/cosmics/2024/root/cosmics_intt_00025145.root") {
+void filling (string path = "/sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/DST_files/QA/cosmics/2024/root/cosmics_intt_00025145.root", int c = 1) {
     TFile *f;
     f = new TFile (path.c_str(), "READ");
-    cout << path << endl;
+    cout << "The path for file: " << path << endl;
     if ( !f ) cout << "something wrong with file" << endl;
 
-    //* Adding all the histogram
-    // h1[0] = (TH1D *)f->Get ("h1_total_cluster_before_cut");
-    // h1[1] = (TH1D *)f->Get ("h1_total_cluster_after_cut");
-    // h1[2] = (TH1D *)f->Get ("h1_cluster_size_before_cut");
-    // h1[3] = (TH1D *)f->Get ("h1_cluster_size_after_cut");
-    // h1[4] = (TH1D *)f->Get ("h1_cluster_adc_before_cut");
-    // h1[5] = (TH1D *)f->Get ("h1_cluster_adc_after_cut");
-    // h2[0] = (TH2D *)f->Get ("h2_cluster_size_adc_before");
-    // h2[1] = (TH2D *)f->Get ("h2_cluster_size_adc_after");
+    switch ( c ) {
+        case 1:
+            //* Adding all the histogram
+            h1[0] = (TH1D *)f->Get ("h1_total_cluster_before_cut");
+            h1[1] = (TH1D *)f->Get ("h1_total_cluster_after_cut");
+            h1[2] = (TH1D *)f->Get ("h1_cluster_size_before_cut");
+            h1[3] = (TH1D *)f->Get ("h1_cluster_size_after_cut");
+            h1[4] = (TH1D *)f->Get ("h1_cluster_adc_before_cut");
+            h1[5] = (TH1D *)f->Get ("h1_cluster_adc_after_cut");
+            h2[0] = (TH2D *)f->Get ("h2_cluster_size_adc_before");
+            h2[1] = (TH2D *)f->Get ("h2_cluster_size_adc_after");
 
-    //* for residual
-    // h1_resi[0] = (TH1D *)f->Get ("h1_resi_xy_4clus");
-    // h1_resi[1] = (TH1D *)f->Get ("h1_resi_zr_4clus");
-    // h1_resi[2] = (TH1D *)f->Get ("h1_resi_xy_5clus");
-    // h1_resi[3] = (TH1D *)f->Get ("h1_resi_zr_5clus");
-    // h1_resi[4] = (TH1D *)f->Get ("h1_resi_xy_6clus");
-    // h1_resi[5] = (TH1D *)f->Get ("h1_resi_zr_6clus");
-    // h1_resi[6] = (TH1D *)f->Get ("h1_resi_xy_7clus");
-    // h1_resi[7] = (TH1D *)f->Get ("h1_resi_zr_7clus");
+            for ( int i = 0; i < 6; i++ ) hsum1[i]->Add (h1[i]);
+            for ( int i = 0; i < 2; i++ ) hsum2[i]->Add (h2[i]);
+            cout << "Debugging..." << endl;
+            break;
 
-    //* for angle
-    h1_angle[0]  = (TH1D *)f->Get ("h1_angle_xy");
-    h1_angle[1]  = (TH1D *)f->Get ("h1_angle_zr");
-    h1_angle[2]  = (TH1D *)f->Get ("h1_angle_cluster_xy");
-    h1_angle[3]  = (TH1D *)f->Get ("h1_angle_cluster_zr");
-    h1_angle[4]  = (TH1D *)f->Get ("h1_constant_xy");
-    h1_angle[5]  = (TH1D *)f->Get ("h1_constant_zr");
-    h1_angle[6]  = (TH1D *)f->Get ("posz");
-    h1_angle[7]  = (TH1D *)f->Get ("distance_from_origin");
-    h1_angle[8]  = (TH1D *)f->Get ("h1_angle_xy_distance_cut_0.5");
-    h1_angle[9]  = (TH1D *)f->Get ("h1_angle_xy_distance_cut_1");
-    h1_angle[10] = (TH1D *)f->Get ("h1_angle_xy_distance_cut_2");
-    h2_angle[0]  = (TH2D *)f->Get ("hitmap_cluster_xy");
-    h2_angle[1]  = (TH2D *)f->Get ("hitmap_cluster_zr");
-    h2_angle[2]  = (TH2D *)f->Get ("projection_hitmap");
-    h2_angle[3]  = (TH2D *)f->Get ("angle_distance");
+        case 2:
+            //* for residual
+            h1_resi[0] = (TH1D *)f->Get ("h1_resi_xy_4clus");
+            h1_resi[1] = (TH1D *)f->Get ("h1_resi_zr_4clus");
+            h1_resi[2] = (TH1D *)f->Get ("h1_resi_xy_5clus");
+            h1_resi[3] = (TH1D *)f->Get ("h1_resi_zr_5clus");
+            h1_resi[4] = (TH1D *)f->Get ("h1_resi_xy_6clus");
+            h1_resi[5] = (TH1D *)f->Get ("h1_resi_zr_6clus");
+            // h1_resi[6] = (TH1D *)f->Get ("h1_resi_xy_7clus");
+            // h1_resi[7] = (TH1D *)f->Get ("h1_resi_zr_7clus");
+            cout << "Processing case 2 (the residual case)... " << endl;
+
+            for ( int i = 0; i < 6; i++ ) hsum1_resi[i]->Add (h1_resi[i]);
+            break;
+
+        case 3:
+            //* for angle
+            h1_angle[0]  = (TH1D *)f->Get ("h1_angle_xy");
+            h1_angle[1]  = (TH1D *)f->Get ("h1_angle_zr");
+            h1_angle[2]  = (TH1D *)f->Get ("h1_angle_cluster_xy");
+            h1_angle[3]  = (TH1D *)f->Get ("h1_angle_cluster_zr");
+            h1_angle[4]  = (TH1D *)f->Get ("h1_constant_xy");
+            h1_angle[5]  = (TH1D *)f->Get ("h1_constant_zr");
+            h1_angle[6]  = (TH1D *)f->Get ("posz");
+            h1_angle[7]  = (TH1D *)f->Get ("distance_from_origin");
+            h1_angle[8]  = (TH1D *)f->Get ("h1_angle_xy_distance_cut_0.5");
+            h1_angle[9]  = (TH1D *)f->Get ("h1_angle_xy_distance_cut_1");
+            h1_angle[10] = (TH1D *)f->Get ("h1_angle_xy_distance_cut_2");
+            h2_angle[0]  = (TH2D *)f->Get ("hitmap_cluster_xy");
+            h2_angle[1]  = (TH2D *)f->Get ("hitmap_cluster_zr");
+            h2_angle[2]  = (TH2D *)f->Get ("projection_hitmap");
+            h2_angle[3]  = (TH2D *)f->Get ("angle_distance");
+
+            for ( int i = 0; i < 11; i++ ) hsum1_angle[i]->Add (h1_angle[i]);
+            for ( int i = 0; i < 4; i++ ) hsum2_angle[i]->Add (h2_angle[i]);
+            break;
+    }
 
     //* for zr_2D
     // h2_zr_2D = (TH2D *)f->Get ("h2_zr_resi_check");
@@ -80,8 +98,8 @@ void filling (string path = "/sphenix/tg/tg01/commissioning/INTT/work/weiche/my_
     // for ( int i = 0; i < 6; i++ ) hsum1_resi[i]->Add (h1_resi[i]);
     // for ( int i = 0; i < 6; i++ ) hsum1[i]->Add (h1[i]);
     // for ( int i = 0; i < 2; i++ ) hsum2[i]->Add (h2[i]);
-    for ( int i = 0; i < 11; i++ ) hsum1_angle[i]->Add (h1_angle[i]);
-    for ( int i = 0; i < 4; i++ ) hsum2_angle[i]->Add (h2_angle[i]);
+    // for ( int i = 0; i < 11; i++ ) hsum1_angle[i]->Add (h1_angle[i]);
+    // for ( int i = 0; i < 4; i++ ) hsum2_angle[i]->Add (h2_angle[i]);
 
     //* Closing the file somehow cause the problem, don't use Close()
     // f->Close();
@@ -92,45 +110,60 @@ void CosmicTrackQA (string file = "cosmics_intt_00039524_0.root", bool is_debug 
     gErrorIgnoreLevel = kSysError;
 
     hsum2_zr_2D = new TH2D ("h2_zr_resi_check", "ratio vs zr residual", 100, 0, 1, 5, 0, 125);
-    // for ( int i = 0; i < 6; i++ ) hsum1[i] = new TH1D();
-    // for ( int i = 0; i < 2; i++ ) hsum2[i] = new TH2D();
-    // for ( int i = 0; i < 8; i++ ) hsum1_resi[i] = new TH1D ("h1_resi_xy_4clus", "residual dist.", 1000, 0, 0.5);
+    for ( int i = 0; i < 6; i++ ) hsum1[i] = new TH1D();
+    for ( int i = 0; i < 2; i++ ) hsum2[i] = new TH2D();
+    for ( int i = 0; i < 6; i++ ) hsum1_resi[i] = new TH1D ("h1_resi_xy_4clus", "residual dist.", 1000, 0, 0.5);
     for ( int i = 0; i < 11; i++ ) hsum1_angle[i] = new TH1D();
     hsum1_angle[7] = new TH1D ("angle_7", "test", 100, 0, 15);
-    // for ( int i = 0; i < 4; i++ ) hsum2_angle[i] = new TH2D();
+    for ( int i = 0; i < 4; i++ ) hsum2_angle[i] = new TH2D();
     hsum2_angle[0] = new TH2D ("test", "test", 240, -12, 12, 240, -12, 12);
-    hsum2_angle[1] = new TH2D ("test", "test", 250, -25, 25, 240, -12, 12);
+    hsum2_angle[1] = new TH2D ("test", "test", 25, -25, 25, 120, -12, 12);
     hsum2_angle[2] = new TH2D ("test", "test", 240, -12, 12, 240, -12, 12);
     hsum2_angle[3] = new TH2D ("test", "test", 90, 0, 180, 50, 0, 15);
 
-    // for ( int queue = 0; queue < 24; queue++ ) filling (Form ("test/root/39524/plots_angle_zr_residaul_openup_cosmics_intt_00039524_%d.root", queue));
-    // for ( int queue = 0; queue < 24; queue++ ) filling (Form ("test/root/39524/plots_zr_2D_cosmics_intt_00039524_%d.root", queue));
-    // for ( int queue = 0; queue < 29; queue++ ) filling (Form ("test/root/cosmics_intt_00039530_%d.root", queue));
-    // for ( int queue = 0; queue < 24; queue++ ) filling (Form ("test/root/plots_cosmics_intt_00039525_%d.root", queue));
-    filling ("plots_39524_angle_zr_open_cut.root");
-    filling ("plots_39525_angle_zr_open_cut.root");
-    filling ("plots_39527_angle_zr_open_cut.root");
-    filling ("plots_39528_angle_zr_open_cut.root");
-    filling ("plots_39529_angle_zr_open_cut.root");
-    filling ("plots_39530_angle_zr_open_cut.root");
+    int runnumber = 39468;
+    int nevt      = 14;
+
+    // for ( int queue = 0; queue < nevt; queue++ ) filling (Form ("~/workspace/my_INTT/cosmic/DST_files/QA/cosmics/2024/root/%d/cosmics_intt_000%d_%d.root", runnumber, runnumber, queue), 1);
+    // for ( int queue = 0; queue < nevt; queue++ ) filling (Form ("~/workspace/my_INTT/cosmic/DST_files/QA/cosmics/2024/root/%d/plots_angle_zr_residaul_openup_cosmics_intt_000%d_%d.root", runnumber, runnumber, queue), 3);
+    // for ( int queue = 0; queue < nevt; queue++ ) filling (Form ("~/workspace/my_INTT/cosmic/DST_files/QA/cosmics/2024/root/%d/plots_cosmics_intt_000%d_%d.root", runnumber, runnumber, queue), 2);
+    filling ("plots_0_angle_zr_open_cut.root", 3);
+    filling ("plots_angle_zr_open_cut.root", 3);
+    // filling ("plots_39370_angle_zr_open_cut.root", 3);
+    // filling ("plots_39369_angle_zr_open_cut.root", 3);
+    // filling ("plots_39368_angle_zr_open_cut.root", 3);
+    // filling ("plots_39468_angle_zr_open_cut.root", 3);
+    // filling ("plots_39367_angle_zr_open_cut.root", 3);
+    // filling ("plots_39365_angle_zr_open_cut.root", 3);
+
+    // filling ("plots_0_resi.root", 2);
+    // filling ("plots_resi.root", 2);
+    // filling ("plots_39369_resi.root", 2);
+    // filling ("plots_39368_resi.root", 2);
+    // filling ("plots_39468_resi.root", 2);
+    // filling ("plots_39367_resi.root", 2);
+    // filling ("plots_39365_resi.root", 2);
     // filling (path);
 
     // hsum2_zr_2D->SetNameTitle (h2_zr_2D->GetName(), h2_zr_2D->GetTitle());
-    // for ( int i = 0; i < 6; i++ ) hsum1_resi[i]->SetNameTitle (h1_resi[i]->GetName(), h1_resi[i]->GetTitle());
     // for ( int i = 0; i < 6; i++ ) hsum1[i]->SetNameTitle (h1[i]->GetName(), h1[i]->GetTitle());
+    // for ( int i = 0; i < 2; i++ ) hsum2[i]->SetNameTitle (h2[i]->GetName(), h2[i]->GetTitle());
+    // for ( int i = 0; i < 6; i++ ) hsum1_resi[i]->SetNameTitle (h1_resi[i]->GetName(), h1_resi[i]->GetTitle());
     for ( int i = 0; i < 11; i++ ) hsum1_angle[i]->SetNameTitle (h1_angle[i]->GetName(), h1_angle[i]->GetTitle());
     for ( int i = 0; i < 4; i++ ) hsum2_angle[i]->SetNameTitle (h2_angle[i]->GetName(), h2_angle[i]->GetTitle());
-    // for ( int i = 0; i < 2; i++ ) hsum2[i]->SetNameTitle (h2[i]->GetName(), h2[i]->GetTitle());
-    // for ( int i = 0; i < 2; i++ ) hsum2[i]->SetNameTitle (h2[i]->GetName(), h2[i]->GetTitle());
+    hsum2_angle[2]->SetNameTitle (h2_angle[2]->GetName(), "The DCA point on xy plane");
+    hsum2_angle[3]->SetNameTitle (h2_angle[3]->GetName(), "Correlation b/w DCA and track angle");
+    // cout << h1_angle[0]->GetName() << endl;
 
     //* combine the histogram in root files into one
-    TFile *plots = TFile::Open ("plots_angle_zr_open_cut.root", "RECREATE");
+    // TFile *plots = TFile::Open (Form ("plots_%d_angle_zr_open_cut.root", runnumber), "RECREATE");
+    TFile *plots = TFile::Open ("plots_angle_zr_open_cut_combined_tmp.root", "RECREATE");
     for ( int i = 0; i < 11; i++ ) hsum1_angle[i]->Write();
     for ( int i = 0; i < 4; i++ ) hsum2_angle[i]->Write();
-    // TFile *plots = TFile::Open ("plots_39530_QA.root", "RECREATE");
+    // TFile *plots1 = TFile::Open (Form ("plots_%d_QA.root", runnumber), "RECREATE");
     // for ( int i = 0; i < 6; i++ ) hsum1[i]->Write();
     // for ( int i = 0; i < 2; i++ ) hsum2[i]->Write();
-    // TFile *plots = TFile::Open ("plots_resi.root", "RECREATE");
+    // TFile *plots2 = TFile::Open ("plots_resi_combined.root", "RECREATE");
     // for ( int i = 0; i < 6; i++ ) hsum1_resi[i]->Write();
     // TFile *plots = TFile::Open ("plots_39525_zr_2D_check.root", "RECREATE");
     // hsum2_zr_2D->Write();

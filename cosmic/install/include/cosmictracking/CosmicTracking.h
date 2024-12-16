@@ -94,6 +94,7 @@ class CosmicTracking : public SubsysReco {
     // void SetQaDir( string dir ){ output_qa_path_ = dir;};
     void SetYear (int year) { year_ = year; };
     void SetOutputPath (string path);
+    void SetRawDataCheck (int is_check = 0, bool is_cluster_check = true);
 
    private:
     //* variables
@@ -252,7 +253,6 @@ class CosmicTracking : public SubsysReco {
     void   MakeGraphs (vector<TrkrCluster *> &clusters);
     void   HitMapCheck (vector<TrkrCluster *> &clusters);
     int    ProcessEventRawHit();
-    void   SetRawDataCheck (int is_check = 0, bool is_cluster_check = true);
     int    ClusterCut (vector<TrkrCluster *> &clusters, int i = 0);
 };
 

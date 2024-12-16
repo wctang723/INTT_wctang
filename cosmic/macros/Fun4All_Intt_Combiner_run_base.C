@@ -104,7 +104,7 @@ void Fun4All_Intt_Combiner_run_base (int  run_num  = 39524,
         nBcoVal = 1;
         sngl->SetNegativeBco (nBcoVal);
         sngl->SetBcoRange (2);
-        // sngl->SetBcoRange(2);
+
         in->registerStreamingInput (sngl, InputManagerType::INTT);
     }
     se->registerInputManager (in);

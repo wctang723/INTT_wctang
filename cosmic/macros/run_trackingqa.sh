@@ -3,8 +3,8 @@ export USER="$(id -u -n)"
 export LOGNAME=${USER}
 export HOME=/sphenix/u/${LOGNAME}
 
-if [[ $# -ne 4 ]]; then
-	echo "inputs needs 4 variables"
+if [[ $# -ne 5 ]]; then
+	echo "inputs needs 5 variables"
 	exit 1
 fi
 
