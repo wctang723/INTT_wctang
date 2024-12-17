@@ -58,5 +58,5 @@ condor_log/
 *~
 *.root
 *.log*
-*.err
+*.err*
 *.out
