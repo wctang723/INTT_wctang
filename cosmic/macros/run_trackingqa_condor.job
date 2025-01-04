@@ -7,8 +7,8 @@ request_memory     = 4000MB
 Priority           = 20
 job_lease_duration = 86400
 
-path               = cosmics_intt_00039367_
-runnum             = 39367
+path               = cosmics_intt_00039365_
+runnum             = 39365
 is_debug           = 0
 switchcase         = 1
 Output             = /sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cosmic/macros/condor_log/condor_QA_$(process).out
@@ -16,4 +16,4 @@ Error              = /sphenix/tg/tg01/commissioning/INTT/work/weiche/my_INTT/cos
 Log                = /tmp/condor_wctangQA_$(process).log
 
 Arguments          = $(path) $(runnum) $(is_debug) $(switchcase) $(process)
-Queue 27
+Queue 46

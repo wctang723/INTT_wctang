@@ -51,6 +51,7 @@ configure
 # Some output file
 *.pdf
 *.txt
+*.list
 output_files/
 DST_files/
 condor_log/
